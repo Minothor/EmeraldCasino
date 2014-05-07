@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authors": ["Minothor"],
   "credits": "FormaTIC for providing the inspiration, The Forge team for making modding fun!",
-  "logoFile": "",
+  "logoFile": "/EmeraldCasino.png",
   "screenshots": [],
   "requiredMods": [ "Forge"],
   "dependencies": []
