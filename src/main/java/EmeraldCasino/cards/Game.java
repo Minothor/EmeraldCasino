@@ -42,7 +42,7 @@ public class Game {
 	}
 	
 	public void addPlayer(EntityPlayer player){
-		this.players.add(new Player());
+		this.players.add(new Player(player));
 	}
 	
 	public String toString(ArrayList<Card> cards){

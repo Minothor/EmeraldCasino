@@ -2,16 +2,16 @@
 {
   "modid": "emeraldcasino",
   "name": "Emerald Casino",
-  "description": "Open Source Cards and Casino games mod. Betting is optional.",
-  "version": "${MC1.7.2 - EC0.0.1}",
-  "mcversion": "${1.7.2}",
+  "description": "Open Source Cards and Casino games mod.\nBetting is optional.",
+  "version": "{0.0.1}",
+  "mcversion": "{1.7.2}",
   "url": "https://github.com/Minothor/EmeraldCasino",
   "updateUrl": "",
   "authors": ["Minothor"],
-  "credits": "FormaTIC for providing the inspiration, The Forge team for making modding fun!",
+  "credits": "FormaTIC for providing the inspiration.\nThe Forge team for making modding fun!",
   "logoFile": "/EmeraldCasino.png",
   "screenshots": [],
-  "requiredMods": [ "Forge"],
+  "requiredMods": ["Forge"],
   "dependencies": []
 }
 ]

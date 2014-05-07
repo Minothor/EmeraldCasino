@@ -6,8 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 
 public class Hand {
-	private EntityPlayer player;
-	public ArrayList<Card> cards = new ArrayList<Card>();
+	private ArrayList<Card> cards = new ArrayList<Card>();
 	
 	public Hand() {
 	}

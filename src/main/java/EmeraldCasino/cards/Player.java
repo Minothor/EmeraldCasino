@@ -6,12 +6,13 @@ public class Player {
 	Hand hand;
 	EntityPlayer player;
 	
-	public Player() {
-		this(new Hand());
+	public Player(EntityPlayer player) {
+		this(new Hand(), player);
 	}
 	
-	public Player (Hand h){
+	public Player (Hand h, EntityPlayer player){
 		this.hand=h;
+		this.player = player;
 	}
 
 }
