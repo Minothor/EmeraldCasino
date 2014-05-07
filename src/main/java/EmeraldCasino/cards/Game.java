@@ -1,16 +1,15 @@
-package cards;
+package EmeraldCasino.cards;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cards.Card;
-import cards.Deck;
-import cards.Hand;
+import net.minecraft.entity.player.EntityPlayer;
+
 public class Game {
 
  protected List<Card> tableCards = new ArrayList<Card>();
- protected Hand dealerHand = new Hand(new playerEntity());
- protected List<Hand> playerHands = new ArrayList<Hand>();
+ protected Hand dealerHand = new Hand();
+ protected List<Player> players = new ArrayList<Player>();
  protected Deck deck = new Deck();
 	public Game() {
 	// TODO Auto-generated constructor stub
@@ -42,8 +41,8 @@ public class Game {
 		return cards;
 	}
 	
-	public void addPlayer(playerEntity player){
-		this.playerHands.add(new Hand(player));
+	public void addPlayer(EntityPlayer player){
+		this.players.add(new Player());
 	}
 	
 	public String toString(ArrayList<Card> cards){

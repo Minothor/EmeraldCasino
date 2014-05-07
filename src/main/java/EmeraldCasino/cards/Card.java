@@ -1,4 +1,4 @@
-package cards;
+package EmeraldCasino.cards;
 
 public class Card{
 	private int house, value;

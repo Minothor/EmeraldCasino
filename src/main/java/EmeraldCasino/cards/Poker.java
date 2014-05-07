@@ -1,4 +1,4 @@
-package cards;
+package EmeraldCasino.cards;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import cards.Game;
+
 public class Poker extends Game {
 	private boolean royal = false,flush = false,straight = false;
 	private ArrayList<Integer> oK4 =new ArrayList<Integer>();
@@ -18,8 +18,8 @@ public class Poker extends Game {
 	}
 	@Override
 	public void DealCards(){
-		for (int i = 0; i>playerHands.size();i++){
-			this.playerHands.get(i).takeCard(this.deck);			
+		for (int i = 0; i>players.size();i++){
+			this.players.get(i).hand.takeCard(this.deck);			
 		}
 	}
 	
@@ -34,7 +34,7 @@ public class Poker extends Game {
 			cardVals.put(cardValue,1+val);
 		}
 		System.out.println(cardVals.toString());
-		for(Map.Entry entry: cardVals.entrySet()){
+		for(Map.Entry<Integer,Integer> entry: cardVals.entrySet()){
 			if((int) entry.getValue()==2){
 				this.oK2.add((Integer) entry.getKey());
 			}
