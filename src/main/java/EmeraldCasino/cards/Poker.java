@@ -8,7 +8,7 @@ import java.util.Set;
 
 
 public class Poker extends Game {
-	private boolean royal = false,flush = false,straight = false;
+	private boolean flush = false,straight = false;
 	private ArrayList<Integer> oK4 =new ArrayList<Integer>();
 	private ArrayList<Integer> oK3 =new ArrayList<Integer>();
 	private ArrayList<Integer> oK2 =new ArrayList<Integer>();
@@ -19,7 +19,7 @@ public class Poker extends Game {
 	@Override
 	public void DealCards(){
 		for (int i = 0; i>players.size();i++){
-			this.players.get(i).hand.takeCard(this.deck);			
+			this.players.get(i).getHand().addCard(this.deck.takeCard());			
 		}
 	}
 	
@@ -89,7 +89,6 @@ public class Poker extends Game {
 	protected int EvalHand(ArrayList<Card> cards){
 		int priority1=1;
 		
-		//int[] priority={0,0,0,0};
 		ArrayList<Card> toSort= new ArrayList<Card>(), toEval;
 		toSort.addAll(tableCards);
 		toSort.addAll(cards);

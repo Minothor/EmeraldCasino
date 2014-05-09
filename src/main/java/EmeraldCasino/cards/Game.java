@@ -3,10 +3,13 @@ package EmeraldCasino.cards;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 
 public class Game {
 
+protected static MinecraftServer server = MinecraftServer.getServer();
  protected List<Card> tableCards = new ArrayList<Card>();
  protected Hand dealerHand = new Hand();
  protected List<Player> players = new ArrayList<Player>();
@@ -41,7 +44,8 @@ public class Game {
 		return cards;
 	}
 	
-	public void addPlayer(EntityPlayer player){
+	public void addPlayer(String username){
+		EntityPlayer player = server.getConfigurationManager().getPlayerForUsername(username);
 		this.players.add(new Player(player));
 	}
 	

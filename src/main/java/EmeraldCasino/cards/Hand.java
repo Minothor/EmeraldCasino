@@ -10,9 +10,18 @@ public class Hand {
 	
 	public Hand() {
 	}
-	public void takeCard(Deck deck){
-		cards.add(deck.takeCard());
-		//System.out.println("Recieved: "+cards.get((cards.size()-1)).toString());
+	public void addCard(Card card){
+		cards.add(card);
+	}
+	
+	public Card removeCard(){
+		return removeCard(0);
+	}
+	
+	public Card removeCard(int index){
+		Card  temp = cards.get(index);
+		cards.remove(index);
+		return temp;
 	}
 	
 	public void play(Game game){
@@ -28,5 +37,8 @@ public class Hand {
 	public void play(Game game, ArrayList<Card> cards){
 		int priority=game.EvalHand(cards);
 		System.out.println("Hand Priority: "+priority);
+	}
+	public int size() {
+		return this.cards.size();
 	}
 }

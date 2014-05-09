@@ -14,6 +14,7 @@ public class testing {
 		b.cards.add(new Card(2,10));
 		b.cards.add(new Card(3,10));
 		b.cards.add(new Card(4,13));*/
+		g.addPlayer("Minothor");
 		b.play(g);
 		System.out.println("******************************************");
 	}
