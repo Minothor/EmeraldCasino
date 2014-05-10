@@ -35,8 +35,11 @@ public class Hand {
 	}
 	
 	public void play(Game game, ArrayList<Card> cards){
-		int priority=game.EvalHand(cards);
-		System.out.println("Hand Priority: "+priority);
+		int[] priority=game.EvalHand(cards);
+		System.out.println("Hand Priority: ");
+		for (int i : priority) {
+			System.out.println(i);
+		}
 	}
 	public int size() {
 		return this.cards.size();

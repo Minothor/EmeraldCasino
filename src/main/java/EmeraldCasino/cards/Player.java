@@ -15,11 +15,7 @@ public class Player {
 	public Player (Hand h, EntityPlayer player){
 		this.hands.add(h);
 		this.player = player;
-	}
-	
-	public Hand getHand(){
-		return getHand(0);
-	}
+	}	
 	
 	public void splitHand(int handIndex, int cardIndex){
 		Hand a = new Hand();
@@ -31,6 +27,10 @@ public class Player {
 	
 	public void splitHand(int cardIndex){
 		splitHand(0,cardIndex);
+	}
+	
+	public Hand getHand(){
+		return getHand(0);
 	}
 	
 	public Hand getHand(int index){

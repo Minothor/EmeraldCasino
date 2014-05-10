@@ -86,8 +86,14 @@ public class Poker extends Game {
 	}
 	
 	@Override
-	protected int EvalHand(ArrayList<Card> cards){
-		int priority1=1;
+	protected int[] EvalHand(ArrayList<Card> cards){
+		//Returns an array of integers.
+		//First value is the Hand value, ranging from HighCard:1 to RoyalFlush:10
+		//Second value is the card value of 4 of a Kind, ranging from 2 to 14 (high ace)
+		//Third value is the card value of 3 of a Kind, ranging from 2 to 14 (high ace)
+		//Fourth value is the Highest pair value, ranging from 2 to 14 (high ace)
+		//Fifth value is the highest card value in the deck, ranging from 2 to 14 (high ace)
+		int[] priority={1,0,0,0,0};
 		
 		ArrayList<Card> toSort= new ArrayList<Card>(), toEval;
 		toSort.addAll(tableCards);
@@ -96,36 +102,75 @@ public class Poker extends Game {
 		
 		checkMultis(toEval);
 		if(!oK2.isEmpty()){
-			priority1+=oK2.size();
-		}
+			priority[0]+=oK2.size();
+			int[] tempArr= new int[oK2.size()];
+			int index = 0;
+			for (int val : oK2) {
+				tempArr[index++]=val;
+			}
+			priority[3]=getMax(tempArr);
+			}
 		
 		if(!oK3.isEmpty()){
-			priority1+=(3*oK3.size());
+			priority[0]+=(3*oK3.size());
+			priority[2] = oK3.get(0);
 		}
 		
 		if(!oK4.isEmpty()){
-			priority1+=7;
+			priority[0]+=7;
+			priority[1] = oK4.get(0);
 		}
 		
 		if(oK2.isEmpty()&&oK3.isEmpty()&&oK4.isEmpty()){
 		straight=checkStraight(toEval);
 			if(straight){
-				priority1+=4;
+				priority[0]+=4;
 			}
 		}
 		
-		if(priority1==5&&(!straight)){
-			priority1+=2;
+		if(priority[0]==5&&(!straight)){
+			priority[0]+=2;
 		}
 		
 		flush=checkFlush(toEval);
 		if(flush){
-			priority1+=5;
+			priority[0]+=5;
 		}
 		
 		if(flush&&straight){
-			priority1-=checkRoyal(toEval)?0:1;
+			priority[0]-=checkRoyal(toEval)?0:1;
 		}
-		return priority1;
+		
+		priority[4]=getMax(toEval);
+		
+		
+		for (int i=1;i<=4;i++){
+			if(priority[i]==1){
+				priority[i]+=13;
+			}
+		}
+		return priority;
+	}
+	private int getMax(ArrayList<Card> toEval) {
+		int[] intList= {0,0,0,0,0};
+		int index = 0;
+		for (Card card : toEval) {
+		intList[index++]=card.getValue();
+		}
+		
+		
+		return getMax(intList);
+	}
+	
+	private int getMax(int[] toEval) {
+		int max=toEval[0];
+		for (int val : toEval) {
+			if(val>max||val==1&&max!=1){
+				max=val;
+			}
+		}
+		
+		
+		return max;
 	} 
 }

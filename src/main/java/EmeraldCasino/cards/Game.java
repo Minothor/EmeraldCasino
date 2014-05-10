@@ -21,12 +21,12 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 		
 	}
 	
-	protected int EvalHand(ArrayList<Card> cards){
-		int priority1=1;
+	protected int[] EvalHand(ArrayList<Card> cards){
+		int[] priority={};
 		List toEval=this.sortCards(cards);
 		
-		return priority1;
-	} 
+		return priority;
+	}
 	
 	protected ArrayList<Card> sortCards(ArrayList<Card> cards){
 		System.out.println(this.toString(cards));
