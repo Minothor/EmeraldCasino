@@ -1,3 +1,4 @@
+
 package EmeraldCasino.cards;
 
 import java.util.ArrayList;
@@ -14,9 +15,16 @@ protected static MinecraftServer server = MinecraftServer.getServer();
  protected Hand dealerHand = new Hand();
  protected List<Player> players = new ArrayList<Player>();
  protected Deck deck = new Deck();
+ private int[] buyIn={0,0};
+ 
+	/**
+	 * Default Constructor
+	 * 
+	 */
 	public Game() {
-	// TODO Auto-generated constructor stub
-}
+		
+	}
+	
 	protected void DealCards(){
 		
 	}
