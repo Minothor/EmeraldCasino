@@ -1,5 +1,6 @@
 package EmeraldCasino.cards;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,12 +30,12 @@ public class Hand {
 	}
 	
 	public void play(Game game, Card card){
-		ArrayList<Card> cards = new ArrayList<Card>();
+		List<Card> cards = new LinkedList<>();
 		cards.add(card);
 		play(game,cards);	
 	}
 	
-	public void play(Game game, ArrayList<Card> cards){
+	public void play(Game game, List<Card> cards){
 		int[] priority=game.EvalHand(cards);
 		System.out.println("Hand Priority: ");
 		for (int i : priority) {

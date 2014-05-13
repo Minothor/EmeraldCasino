@@ -1,5 +1,6 @@
 package EmeraldCasino.cards;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,35 +10,34 @@ import java.util.Set;
 import net.minecraft.init.Items;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * The Poker Class.
- * Allows for games of basic 5 card draw.
+ * Basic Poker Implementation, allowing for games of basic 5 card draw.
+ * @author Minothor
+ * @version 1.0
  */
 public class Poker extends Game {
 	
 	/** Booleans for flush and straight. Initialised to false. */
 	protected boolean flush = false, straight = false;
 	
-	/** ArrayList of Integers for 4 of a Kind card values. */
-	protected ArrayList<Integer> oK4 =new ArrayList<Integer>();
+	/** List of Integers for 4 of a Kind card values. */
+	protected LinkedList<Integer> oK4 =new LinkedList<>();
 	
-	/** ArrayList of Integers for 3 of a Kind card values. */
-	protected ArrayList<Integer> oK3 =new ArrayList<Integer>();
+	/** List of Integers for 3 of a Kind card values. */
+	protected LinkedList<Integer> oK3 =new LinkedList<Integer>();
 	
-	/** ArrayList of Integers for 4 of a Kind card values. */
-	protected ArrayList<Integer> oK2 =new ArrayList<Integer>();
+	/** List of Integers for 4 of a Kind card values. */
+	protected LinkedList<Integer> oK2 =new LinkedList<Integer>();
 	
 	/**
-	 * Instantiates a new poker game.
+	 * Instantiates a new poker game class.
 	 */
 	public Poker() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
-	/* (non-Javadoc)
-	 * @see EmeraldCasino.cards.Game#DealCards()
+	/**
+	 * Deals 1 Card to each Player from the in game Deck.
 	 */
 	@Override
 	public void DealCards(){
@@ -47,15 +47,17 @@ public class Poker extends Game {
 	}
 	
 	/**
-	 * Check multis.
+	 * Clears the oK# lists and fills them with the values derived from the cards list.
+	 * 
+	 * Constructs a HashMap with Card Values as Keys and increments the associated Value to count.
 	 *
-	 * @param cards the cards
+	 * @param toEval The List of cards to parse.
 	 */
-	protected void checkMultis(ArrayList<Card> cards){
+	protected void checkMultis(List<Card> toEval){
 		oK2.clear();
 		int cardValue;
 		Map<Integer,Integer> cardVals= new HashMap<Integer,Integer>();
-		for (Card card : cards) {
+		for (Card card : toEval) {
 			cardValue=card.getValue();
 			Integer val = cardVals.get(cardValue);
 			val = (val==null?0:val);
@@ -80,16 +82,17 @@ public class Poker extends Game {
 	
 	/**
 	 * Checks if the cards form a consecutive sequence.
+	 * Iterates along the List comparing the card values.
 	 *
-	 * @param cards, the list of cards
-	 * @return true, if successful
+	 * @param cards The list of cards to be evaluated
+	 * @return true If it reaches the end of the list and the difference is 1 for a standard Straigh or 9 for a Royal Flush
 	 */
-	protected boolean checkStraight(ArrayList<Card> cards){
+	protected boolean checkStraight(List<Card> toEval){
 		int diff=1;
-		int size=cards.size();
+		int size=toEval.size();
 		boolean result = false;
 		for(int i=1; i<size&&diff==1;i++){
-			diff=cards.get(i-1).getValue()-cards.get(i).getValue();
+			diff=toEval.get(i-1).getValue()-toEval.get(i).getValue();
 			if(i==size-1 && (diff==1||diff==9)){
 				result=true;
 			}
@@ -99,13 +102,15 @@ public class Poker extends Game {
 	
 	/**
 	 * Checks if the cards are all from the same house.
+	 * Parses the list of cards comparing the house value.
 	 *
-	 * @param cards, the list of cards.
-	 * @return true, if successful
+	 * @param cards The List of cards to Evaluate.
+	 * @return true, If successful the difference between tested cards remains 0
 	 */
-	protected boolean checkFlush(ArrayList<Card> cards){
+	protected boolean checkFlush(List<Card> cards){
 		int size=cards.size();
 		int diff=0;
+		
 		boolean result = false;
 		for(int i=1; i<size&&diff==0;i++){
 			diff=cards.get(i-1).getHouse()-cards.get(i).getHouse();
@@ -118,22 +123,20 @@ public class Poker extends Game {
 	
 	/**
 	 * Checks if the card hand is a royal flush.
+	 *	Only called if both Straight() and Flush() are true. 
 	 *
-	 * @param cards, the list of cards
-	 * @return true, if successful
+	 * @param toEval A List of cards to be evaluated.
+	 * @return true if the Max card value is 13 and the Min card value is 1
 	 */
-	protected boolean checkRoyal(ArrayList<Card> cards){
-		int size=cards.size();
-		boolean result = false;
-		if((cards.get(0).getValue()==13)&&(cards.get(size-1).getValue()==1)){
-				result=true;
-		}
-		return result;
+	protected boolean checkRoyal(List<Card> toEval){
+		Card max = Collections.max(toEval, Card.compareValue);
+		Card min = Collections.min(toEval, Card.compareValue);
+		return (max.getValue()==13)&&(min.getValue()==1);
 	}
 	
 	
 	/**
-	 * EvalHand(ArrayList<Card>)
+	 * EvalHand(List<Card>)
 	 * Evaluates the Hand passed.
 	 * 
 	 * @param cards
@@ -141,17 +144,20 @@ public class Poker extends Game {
 	 * 
 	 * @return priority[]
 	 * Returns an array of integers.
-	 * First value is the Hand value, ranging from HighCard:1 to RoyalFlush:10
-	 * Second value is the card value of 4 of a Kind, ranging from 2 to 14 (high ace)
-	 * Third value is the card value of 3 of a Kind, ranging from 2 to 14 (high ace)
-	 * Fourth value is the Highest pair value, ranging from 2 to 14 (high ace)
-	 * Fifth value is the highest card value in the deck, ranging from 2 to 14 (high ace)
+	 * <ul>
+	 * <li>First value is the Hand value, ranging from HighCard:1 to RoyalFlush:10</li>
+	 * <li>Second value is the card value of 4 of a Kind, ranging from 2 to 14 (high ace)</li>
+	 * <li>Third value is the card value of 3 of a Kind, ranging from 2 to 14 (high ace)</li>
+	 * <li>Fourth value is the Highest pair value, ranging from 2 to 14 (high ace)</li>
+	 * <li>Fifth value is the highest card value in the deck, ranging from 2 to 14 (high ace)</li>
+	 * </ul>
 	 * 
 	 */
 	@Override
-	protected int[] EvalHand(ArrayList<Card> cards){
+	protected int[] EvalHand(List<Card> cards){
 		int[] priority={1,0,0,0,0};
-		ArrayList<Card> toSort= new ArrayList<Card>(), toEval;
+		LinkedList<Card> toSort= new LinkedList<Card>();
+		List<Card> toEval;
 		toSort.addAll(tableCards);
 		toSort.addAll(cards);
 		toEval = sortCards(toSort);
@@ -187,7 +193,7 @@ public class Poker extends Game {
 		if(priority[0]==5&&(!straight)){
 			priority[0]+=2;
 		}
-		
+
 		flush=checkFlush(toEval);
 		if(flush){
 			priority[0]+=5;
@@ -215,8 +221,8 @@ public class Poker extends Game {
 	 * @param toEval the list of cards
 	 * @return the maximum value of the cards parsed.
 	 */
-	protected int getMax(ArrayList<Card> toEval) {
-		int[] intList= {0,0,0,0,0};
+	protected int getMax(List<Card> toEval) {
+		int[] intList= new int[toEval.size()];
 		int index = 0;
 		for (Card card : toEval) {
 		intList[index++]=card.getValue();

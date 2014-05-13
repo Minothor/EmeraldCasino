@@ -2,12 +2,13 @@ package EmeraldCasino.cards;
 
 
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class Deck {
-	private List<Card> cards = new ArrayList<Card>();
+	private List<Card> cards = new LinkedList<Card>();
 	private int deckSize = 52;
 	public Deck(){
 		byte house=1, value=1;
@@ -24,16 +25,7 @@ public class Deck {
 	
 	
 	public void shuffle(){
-		int length = cards.size(),target;
-		Card temp;
-		for(int i=0;i<=(length); i++){
-			for(int j = 0;j<length;j++){
-				target =(int) Math.rint((length-1)*Math.random());
-				temp=cards.get(0);
-				cards.set(0, cards.get(target));
-				cards.set(target,temp);
-			}
-		}
+		Collections.shuffle(cards);
 	}
 	
 	public Card takeCard(){

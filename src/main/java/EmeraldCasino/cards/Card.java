@@ -1,5 +1,7 @@
 package EmeraldCasino.cards;
 
+import java.util.Comparator;
+
 public class Card{
 	private int house, value;
 	
@@ -38,4 +40,35 @@ public class Card{
 		}
 		return(value+" of "+house);
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Card)){
+			return false;
+		}
+		Card c = (Card) obj;
+		return (this.getValue()==c.getValue());
+	}
+	
+	public static Comparator<Card> compareValue = new Comparator<Card>(){
+
+		@Override
+		public int compare(Card c1, Card c2) {
+			Integer v1 = c1.getValue();
+			Integer v2 = c2.getValue();
+			return v1.compareTo(v2);
+		}
+		
+	};
+	
+	public static Comparator<Card> compareHouse = new Comparator<Card>(){
+
+		@Override
+		public int compare(Card c1, Card c2) {
+			Integer h1 = c1.getHouse();
+			Integer h2 = c2.getHouse();
+			return h1.compareTo(h2);
+		}
+		
+	};
+	
 }

@@ -2,6 +2,8 @@
 package EmeraldCasino.cards;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
@@ -11,9 +13,9 @@ import net.minecraft.server.MinecraftServer;
 public class Game {
 
 protected static MinecraftServer server = MinecraftServer.getServer();
- protected List<Card> tableCards = new ArrayList<Card>();
+ protected List<Card> tableCards = new LinkedList<>();
  protected Hand dealerHand = new Hand();
- protected List<Player> players = new ArrayList<Player>();
+ protected List<Player> players = new LinkedList<>();
  protected Deck deck = new Deck();
  private int[] buyIn={0,0};
  
@@ -29,27 +31,16 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 		
 	}
 	
-	protected int[] EvalHand(ArrayList<Card> cards){
+	protected int[] EvalHand(List<Card> cards){
 		int[] priority={};
 		List toEval=this.sortCards(cards);
 		
 		return priority;
 	}
 	
-	protected ArrayList<Card> sortCards(ArrayList<Card> cards){
-		System.out.println(this.toString(cards));
-		Card temp;
-		int sorted,i,length=cards.size();
-		for(sorted=1;sorted<length;sorted++){
-			temp=cards.get(sorted);
-			for(i=(sorted-1);(i >= 0) && (cards.get(i).getValue()<temp.getValue());i--){
-				cards.set(i+1,cards.get(i));
-			}
-			cards.set(i+1, temp);
-		}
-		
-		System.out.println(this.toString(cards));
-		return cards;
+	protected List<Card> sortCards(List<Card> toSort){
+		Collections.sort(toSort,Card.compareValue);
+		return toSort;
 	}
 	
 	public void addPlayer(String username){
