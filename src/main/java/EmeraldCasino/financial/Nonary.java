@@ -29,19 +29,36 @@ public class Nonary {
 
 	private static int changeBase (int value, int base1, int base2){
 		int offset = 10;
-		int pow = 1;
-		int temp = 0;
-		int result = value - (10*(value/10));
-		temp = value-result;
-		int current = 0;
-		while(temp>=1){
-			current = temp -(offset*(temp/offset));
-			temp -= current;
-			System.out.println(temp);
-			result+=(current*(Math.pow(base1, pow)));
+		int pow = 0;
+		int result = 0;
+		int temp=0;
+		int units;
+		
+		while(value>=1){
+			units = value - (offset*(value/offset));
+			System.out.println("temp = "+temp);
+			value-=units;
+			value/=10;
+			System.out.println("units = "+units);
+			temp += (units*Math.pow(base1, pow));
 			offset*=10;
 			pow++;
+			System.out.println(temp);
 		}
+		offset=10;
+		pow=0;
+		while(temp>=1){
+			units = temp - (offset*(temp/offset));
+			System.out.println("temp = "+temp);
+			temp-=units;
+			temp/=10;
+			System.out.println("units = "+units);
+			result += (units*Math.pow(base2, pow));
+			offset*=10;
+			pow++;
+			System.out.println(result);
+		}
+		
 		return result;
 	}
 
@@ -78,14 +95,20 @@ public class Nonary {
 		return toNonary(result);
 	}
 
+	public static int pTest(int base, int pow){
+		int result = (int) Math.pow(base, (pow));
+		return result;
+	}
+	
 	public static void main(String[] args) {
-		int val1 = 18;
+		int val1 = 100;
 		int val2 = 121;
 
 //System.out.println(changeBase(1+81*2,10, 9));
-System.out.println(""+val1+" in Nonary: "+Nonary.toNonary(val1));
-//System.out.println(""+val2+" in Decimal: "+nonaryCalc.toDecimal(val2));
+//System.out.println(""+val1+" in Nonary: "+Nonary.toNonary(val1));
+System.out.println(""+val1+" in Decimal: "+Nonary.toDecimal(val1));
 		//System.out.println(""+val1+" + "+val2+" = "+Nonary.add(val1, val2));
+		//System.out.println(pTest(10,1));
 	}
 
 }
