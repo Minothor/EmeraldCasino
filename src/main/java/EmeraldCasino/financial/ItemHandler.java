@@ -9,7 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public final class items {
+public final class ItemHandler {
 	private static final Block BLOCKEMERALD = Blocks.emerald_block;
 	private static final Item EMERALD = Items.emerald;
 	private static final Block BLOCKGOLD = Blocks.gold_block;
@@ -17,13 +17,16 @@ public final class items {
 	private static final Item NUGGETGOLD = Items.gold_nugget;
 	
 	
-	private items() {
+	private ItemHandler() {
 	}
 	
-	private static int depositItems(List<ItemStack> inputItems)
+	public static int depositItems(List<ItemStack> inputItems)
 	{	
 		int result = 0;
 		//List<ItemStack> inputItems = new ArrayList(5);
+		
+		// TODO Verify Item types from the list.
+		
 		int emBlocks = (inputItems.get(0).stackSize);
 		int emItems =  (inputItems.get(1).stackSize);
 		int goBlocks =  (inputItems.get(2).stackSize);
@@ -57,28 +60,33 @@ public final class items {
 		return result;
 	}
 	
-	private static List<ItemStack> withdrawItems(int input)
+	/**
+	 * 
+	 * @param inputNonary The Nonary value of items being withdrawn.
+	 * @return List of ItemStacks
+	 */
+	public static List<ItemStack> withdrawItems(int inputNonary)
 	{	
-		System.out.println("Integer "+input+" Translates into:");
+		System.out.println("Integer "+inputNonary+" Translates into:");
 		List<ItemStack> ReturnItems = new ArrayList<>(5);
 		
 		//safety checks
-		int emBlocks = (input/10000);
+		int emBlocks = (inputNonary/10000);
 		if(emBlocks<0) emBlocks=0;
 		
-		int emItems =  (input-=(emBlocks*10000))/1000;
+		int emItems =  (inputNonary-=(emBlocks*10000))/1000;
 		if(emItems<0) emItems=0;
 		
-		int goBlocks =  (input-=(emItems*1000))/100;
+		int goBlocks =  (inputNonary-=(emItems*1000))/100;
 		if(goBlocks<0) goBlocks=0;
 		
-		int goItems  =  (input-=(goBlocks*100))/10;
+		int goItems  =  (inputNonary-=(goBlocks*100))/10;
 		if(goItems<0) goItems=0;
 		
-		int goNuggets  =  (input-=(goItems*10));
+		int goNuggets  =  (inputNonary-=(goItems*10));
 		if(goNuggets<0) goNuggets=0;
 		
-		//CleanUp time:		
+		//CleanUp time:
 		//Checking if Emeralds can be compressed into one stack
 				if (((emBlocks*9)+emItems)<=64){
 					emItems+=(emBlocks*9);
@@ -94,11 +102,26 @@ public final class items {
 		System.out.println("Emeralds:\nBlocks: "+emBlocks+"\nItems: "+emItems);
 		System.out.println("Gold:\nBlocks: "+goBlocks+"\nIngots: "+goItems+"\nNuggets: "+goNuggets);
 		
+		
+		while(emBlocks>64){
+			ReturnItems.add(0, new ItemStack(BLOCKEMERALD, 64));
+			emBlocks-=64;
+		}
+		if(emBlocks>0)
 		ReturnItems.add(0, new ItemStack(BLOCKEMERALD, emBlocks));
+		
+		if(emItems>0)
 		ReturnItems.add(1, new ItemStack(EMERALD, emItems));
+		
+		if(goBlocks>0)
 		ReturnItems.add(2, new ItemStack(BLOCKGOLD, goBlocks));
+		
+		if(goItems>0)
 		ReturnItems.add(3, new ItemStack(GOLD, goItems));
+		
+		if(goNuggets>0)
 		ReturnItems.add(4, new ItemStack(NUGGETGOLD, goNuggets));
+		
 		return ReturnItems;
 	}
 	
