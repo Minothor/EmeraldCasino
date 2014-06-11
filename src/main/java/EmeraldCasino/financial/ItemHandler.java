@@ -10,31 +10,45 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public final class ItemHandler {
-	private static final Block BLOCKEMERALD = Blocks.emerald_block;
-	private static final Item EMERALD = Items.emerald;
-	private static final Block BLOCKGOLD = Blocks.gold_block;
-	private static final Item GOLD = Items.gold_ingot;
-	private static final Item NUGGETGOLD = Items.gold_nugget;
-	
-	
 	private ItemHandler() {
 	}
 	
 	public static int depositItems(List<ItemStack> inputItems)
 	{	
 		int result = 0;
-		//List<ItemStack> inputItems = new ArrayList(5);
-		
+		int emBlocks = 0;
+		int emItems =  0;
+		int goBlocks =  0;
+		int goItems  =  0;
+		int goNuggets  =  0;
 		// TODO Verify Item types from the list.
+		for (ItemStack itemStack : inputItems) {
+			Item itemType = itemStack.getItem();
+			int itemNum = itemStack.stackSize;
+			
+			
+			if(itemType == Item.getItemFromBlock(Blocks.emerald_block)){
+				emBlocks+=itemNum;
+				System.out.println("Added "+itemNum+" Items.emerald Blocks");
+			} else	if(itemType == Items.emerald){
+				emItems+=itemNum;
+				System.out.println("Added "+itemNum+" Items.emeralds");
+			} else if(itemType == Item.getItemFromBlock(Blocks.gold_block)){
+				goBlocks+=itemNum;
+				System.out.println("Added "+itemNum+" Gold Blocks");
+			} else if(itemType == Items.gold_ingot){
+				goItems+=itemNum;
+				System.out.println("Added "+itemNum+" Gold Ingots");
+			} else if(itemType == Items.gold_nugget){
+				goNuggets+=itemNum;
+				System.out.println("Added "+itemNum+" Gold Nuggets");
+			}
+			
+		}
 		
-		int emBlocks = (inputItems.get(0).stackSize);
-		int emItems =  (inputItems.get(1).stackSize);
-		int goBlocks =  (inputItems.get(2).stackSize);
-		int goItems  =  (inputItems.get(3).stackSize);
-		int goNuggets  =  (inputItems.get(4).stackSize);
 		
 		//CleanUp time:		
-		//Checking if Emeralds can be compressed into one stack
+		//Checking if Items.emeralds can be compressed into one stack
 				if (emItems>8){
 					emBlocks+=(emItems/9);
 					emItems%=9;
@@ -87,7 +101,7 @@ public final class ItemHandler {
 		if(goNuggets<0) goNuggets=0;
 		
 		//CleanUp time:
-		//Checking if Emeralds can be compressed into one stack
+		//Checking if Items.emeralds can be compressed into one stack
 				if (((emBlocks*9)+emItems)<=64){
 					emItems+=(emBlocks*9);
 					emBlocks=0;
@@ -99,28 +113,28 @@ public final class ItemHandler {
 				}
 		
 		
-		System.out.println("Emeralds:\nBlocks: "+emBlocks+"\nItems: "+emItems);
+		System.out.println("Items.emeralds:\nBlocks: "+emBlocks+"\nItems: "+emItems);
 		System.out.println("Gold:\nBlocks: "+goBlocks+"\nIngots: "+goItems+"\nNuggets: "+goNuggets);
 		
 		
 		while(emBlocks>64){
-			ReturnItems.add(0, new ItemStack(BLOCKEMERALD, 64));
+			ReturnItems.add(new ItemStack(Blocks.emerald_block, 64));
 			emBlocks-=64;
 		}
 		if(emBlocks>0)
-		ReturnItems.add(0, new ItemStack(BLOCKEMERALD, emBlocks));
+		ReturnItems.add(new ItemStack(Blocks.emerald_block, emBlocks));
 		
 		if(emItems>0)
-		ReturnItems.add(1, new ItemStack(EMERALD, emItems));
+		ReturnItems.add(new ItemStack(Items.emerald, emItems));
 		
 		if(goBlocks>0)
-		ReturnItems.add(2, new ItemStack(BLOCKGOLD, goBlocks));
+		ReturnItems.add(new ItemStack(Blocks.gold_block, goBlocks));
 		
 		if(goItems>0)
-		ReturnItems.add(3, new ItemStack(GOLD, goItems));
+		ReturnItems.add(new ItemStack(Items.gold_ingot, goItems));
 		
 		if(goNuggets>0)
-		ReturnItems.add(4, new ItemStack(NUGGETGOLD, goNuggets));
+		ReturnItems.add(new ItemStack(Items.gold_nugget, goNuggets));
 		
 		return ReturnItems;
 	}
