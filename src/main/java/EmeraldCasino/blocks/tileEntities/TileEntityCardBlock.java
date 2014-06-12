@@ -1,9 +1,8 @@
 package EmeraldCasino.blocks.tileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCardBlock extends TileEntity {
@@ -17,7 +16,7 @@ public class TileEntityCardBlock extends TileEntity {
 	        NBTTagCompound nbtTag = new NBTTagCompound();
 	        this.writeToNBT(nbtTag);
 	        
-	        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+	        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	        }
 	 
 	   @Override
