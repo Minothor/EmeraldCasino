@@ -16,12 +16,12 @@ import net.minecraft.tileentity.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class ModelCardDeck extends ModelBase implements TileEntitySpecialRenderer
+public class modelCardDeck extends ModelBase
 {
   //fields
     ModelRenderer Base,Top,SideF,SideR,SideL,SideB,Card1,Card2;
   
-  public ModelCardDeck()
+  public modelCardDeck()
   {
     textureWidth = 16;
     textureHeight = 16;

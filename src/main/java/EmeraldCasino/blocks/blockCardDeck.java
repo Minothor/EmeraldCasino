@@ -1,8 +1,10 @@
 package EmeraldCasino.blocks;
 
+import EmeraldCasino.blocks.tileEntities.TileEntityCardBlock;
 import EmeraldCasino.cards.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -25,35 +27,21 @@ public class blockCardDeck extends Block{
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess thisblock, int x, int y, int z){
-		int metaD = thisblock.getBlockMetadata(x, y, z);
-		switch (metaD)
-        {
-			case 8:
-        	thisblock.getBlock(x, y, z).setBlockBounds(0.0625F, 0.0625F, 0.0F, 0.9375F, 0.9375F, 1.0F);
-        	break;
-			case 4:
-        	thisblock.getBlock(x, y, z).setBlockBounds(0.0F, 0.0625F, 0.0625F, 1.0F, 0.9375F, 0.9375F);
-        	break;
-			case 0:
-			default:
-        	thisblock.getBlock(x, y, z).setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 1.0F, 0.9375F);
-        	break;
-        }
-		
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
 	public boolean renderAsNormalBlock()
     {
                     return false;
     }
+	
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess blockAccess, int x, int y, int z, int side) {
+		return false;
+	};
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean isOpaqueCube()
     {
-                    return false;
+		return false;
     }
 	
 	@SideOnly(Side.CLIENT)
@@ -102,6 +90,10 @@ public class blockCardDeck extends Block{
 		return metaD;
 	}
 	
+	public TileEntity createTileEntity(World world, int metadata)
+	{
+	   return new TileEntityCardBlock();
+	}
 	
 	
 }
