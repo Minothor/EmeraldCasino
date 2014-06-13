@@ -6,6 +6,10 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCardBlock extends TileEntity {
+	public TileEntityCardBlock() {
+		super();
+		System.out.println("Tile Entity Created!");
+	}
 	 @Override
 	   public void writeToNBT(NBTTagCompound par1)
 	   {

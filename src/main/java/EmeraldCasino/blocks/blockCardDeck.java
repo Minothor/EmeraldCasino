@@ -18,7 +18,7 @@ public class blockCardDeck extends BlockContainer{
 	private Game game;
 	
 	
-	protected blockCardDeck(Material p_i45394_1_) {
+	public blockCardDeck() {
 		super(Material.carpet);
 		setBlockName("BlockCardDeck");
 		setStepSound(Block.soundTypeSnow);
