@@ -17,12 +17,11 @@ local.properties
 .loadpath
 .gradle/
 gradle/
+Documentation/forge-1.7.2-10.12.2.1121-javadoc/
 build/
 eclipse/
 CREDITS-fml.txt
 forge-1.7.2-10.12.1.1060-changelog.txt
-gradlew
-gradlew.bat
 LICENSE-fml.txt
 MinecraftForge-Credits.txt
 MinecraftForge-License.txt
