@@ -8,13 +8,11 @@
 
 
 
-package EmeraldCasino.blocks;
+package EmeraldCasino.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.tileentity.*;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
 
 public class modelCardDeck extends ModelBase
 {
@@ -25,7 +23,6 @@ public class modelCardDeck extends ModelBase
   {
     textureWidth = 16;
     textureHeight = 16;
-    new ResourceLocation("emeraldcasino:textures/blocks/tileDeck.png");
     
       Base = new ModelRenderer(this, -6, 0);
       Base.addBox(0F, 0F, 0F, 8, 0, 6);
