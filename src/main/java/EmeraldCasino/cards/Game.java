@@ -10,7 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 
-public class Game {
+public abstract class Game implements ICardGame{
 
 protected static MinecraftServer server = MinecraftServer.getServer();
  protected List<Card> tableCards = new LinkedList<>();

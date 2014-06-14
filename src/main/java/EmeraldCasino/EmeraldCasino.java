@@ -5,6 +5,7 @@ import EmeraldCasino.blocks.tileEntities.*;
 import EmeraldCasino.blocks.*;
 import EmeraldCasino.items.*;
 import EmeraldCasino.proxies.*;
+import EmeraldCasino.financial.*;
 
 //Item/Block related Imports
 import net.minecraft.block.Block;
@@ -59,8 +60,8 @@ public class EmeraldCasino
   		GameRegistry.registerItem(itemCardDeck, "cardDeck");
   		
   		//Initialise Blocks and TileEntities
-  		blockCardDeck = new blockCardDeck().setBlockName("CardDeck").setCreativeTab(tabEC);
-  		GameRegistry.registerBlock(blockCardDeck, "cardDeck");
+  		blockCardDeck = new blockCardDeck().setBlockName("CardDeckBlock").setCreativeTab(tabEC);
+  		GameRegistry.registerBlock(blockCardDeck, "cardDeckBlock");
   		GameRegistry.registerTileEntity(TileEntityCardBlock.class, "tileEntityCardDeck");
     	
   	}
@@ -69,7 +70,7 @@ public class EmeraldCasino
   	public void init(FMLInitializationEvent event)
   	{
   	//Add Relevant Recipes
-  			GameRegistry.addRecipe(new ShapelessOreRecipe( new ItemStack(itemCardDeck), "X", "Y", "Z",  'X', "dyeBlack",'Y', "dyeRed", 'Z', new ItemStack(Items.paper,52)));
+  			GameRegistry.addRecipe(new ShapelessOreRecipe( new ItemStack(itemCardDeck), "dyeBlack", "dyeRed", new ItemStack(Items.paper,52)));
   	  		
   	}
     

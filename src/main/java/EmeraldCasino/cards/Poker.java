@@ -85,14 +85,14 @@ public class Poker extends Game {
 	 * Iterates along the List comparing the card values.
 	 *
 	 * @param cards The list of cards to be evaluated
-	 * @return true If it reaches the end of the list and the difference is 1 for a standard Straigh or 9 for a Royal Flush
+	 * @return true If it reaches the end of the list and the difference is 1 for a standard Straight or 9 for a Royal Flush
 	 */
-	protected boolean checkStraight(List<Card> toEval){
+	protected boolean checkStraight(List<Card> cards){
 		int diff=1;
-		int size=toEval.size();
+		int size=cards.size();
 		boolean result = false;
 		for(int i=1; i<size&&diff==1;i++){
-			diff=toEval.get(i-1).getValue()-toEval.get(i).getValue();
+			diff=cards.get(i-1).getValue()-cards.get(i).getValue();
 			if(i==size-1 && (diff==1||diff==9)){
 				result=true;
 			}

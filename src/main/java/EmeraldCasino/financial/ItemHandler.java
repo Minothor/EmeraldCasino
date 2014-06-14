@@ -9,10 +9,22 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+/**
+ * ItemStack - Base-9 value Conversion Library for Emerald Casino.
+ * @author Minothor
+ * @version 1.0
+ * 
+ */
 public final class ItemHandler {
 	private ItemHandler() {
 	}
 	
+	/**
+	 * Takes a List of ItemStacks and returns a Base-9 integer value for that list of Stacks.
+	 * Items are automatically compressed into Blocks as a result of the Base-9 counting system.
+	 * @param inputItems List of ItemStacks, order is irrelevant and only Valid items will be parsed.
+	 * @return Base-9 integer value of input stacks @see Nonary.java
+	 */
 	public static int depositItems(List<ItemStack> inputItems)
 	{	
 		int result = 0;
@@ -21,7 +33,7 @@ public final class ItemHandler {
 		int goBlocks =  0;
 		int goItems  =  0;
 		int goNuggets  =  0;
-		// TODO Verify Item types from the list.
+		
 		for (ItemStack itemStack : inputItems) {
 			Item itemType = itemStack.getItem();
 			int itemNum = itemStack.stackSize;
@@ -29,19 +41,14 @@ public final class ItemHandler {
 			
 			if(itemType == Item.getItemFromBlock(Blocks.emerald_block)){
 				emBlocks+=itemNum;
-				System.out.println("Added "+itemNum+" Items.emerald Blocks");
 			} else	if(itemType == Items.emerald){
 				emItems+=itemNum;
-				System.out.println("Added "+itemNum+" Items.emeralds");
 			} else if(itemType == Item.getItemFromBlock(Blocks.gold_block)){
 				goBlocks+=itemNum;
-				System.out.println("Added "+itemNum+" Gold Blocks");
 			} else if(itemType == Items.gold_ingot){
 				goItems+=itemNum;
-				System.out.println("Added "+itemNum+" Gold Ingots");
 			} else if(itemType == Items.gold_nugget){
 				goNuggets+=itemNum;
-				System.out.println("Added "+itemNum+" Gold Nuggets");
 			}
 			
 		}
@@ -75,13 +82,13 @@ public final class ItemHandler {
 	}
 	
 	/**
-	 * 
-	 * @param inputNonary The Nonary value of items being withdrawn.
+	 * Takes a Base-9 integer and returns a list of ItemStacks matching that value.
+	 * Small numbers of blocks will be compressed into stacks of Items if possible to save inventory space. 
+	 * @param inputNonary The Base-9 value of items being withdrawn. @see Nonary.java
 	 * @return List of ItemStacks
 	 */
 	public static List<ItemStack> withdrawItems(int inputNonary)
 	{	
-		System.out.println("Integer "+inputNonary+" Translates into:");
 		List<ItemStack> ReturnItems = new ArrayList<>(5);
 		
 		//safety checks
@@ -112,11 +119,6 @@ public final class ItemHandler {
 					goBlocks=0;
 				}
 		
-		
-		System.out.println("Items.emeralds:\nBlocks: "+emBlocks+"\nItems: "+emItems);
-		System.out.println("Gold:\nBlocks: "+goBlocks+"\nIngots: "+goItems+"\nNuggets: "+goNuggets);
-		
-		
 		while(emBlocks>64){
 			ReturnItems.add(new ItemStack(Blocks.emerald_block, 64));
 			emBlocks-=64;
@@ -137,12 +139,5 @@ public final class ItemHandler {
 		ReturnItems.add(new ItemStack(Items.gold_nugget, goNuggets));
 		
 		return ReturnItems;
-	}
-	
-	public static void main(String[] args) {
-		long start = System.currentTimeMillis();
-		System.out.println("Returned Nonary: "+depositItems(withdrawItems(62001)));
-		long end = System.currentTimeMillis();
-		System.out.println((end - start) + " ms");
 	}
 }
