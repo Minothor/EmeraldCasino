@@ -108,7 +108,7 @@ public final class ItemHandler {
 		if(goNuggets<0) goNuggets=0;
 		
 		//CleanUp time:
-		//Checking if Items.emeralds can be compressed into one stack
+		//Checking if Emeralds can be compressed into one stack
 				if (((emBlocks*9)+emItems)<=64){
 					emItems+=(emBlocks*9);
 					emBlocks=0;

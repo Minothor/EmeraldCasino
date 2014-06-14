@@ -2,12 +2,15 @@ package EmeraldCasino.renderers.blocks;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderEntity;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -24,9 +27,11 @@ import EmeraldCasino.models.modelCardDeck;
 public class TileEntityCardBlockRenderer extends TileEntitySpecialRenderer {
 	private final modelCardDeck model;
 	private final ResourceLocation texture;
+	public static int blockRenderId;
 	
 	public TileEntityCardBlockRenderer() {
 		model = new modelCardDeck();
+		blockRenderId = RenderingRegistry.getNextAvailableRenderId();
 		texture = new ResourceLocation(EmeraldCasino.MODID+":textures/blocks/tileDeck.png");
 	}
 
@@ -45,7 +50,7 @@ public class TileEntityCardBlockRenderer extends TileEntitySpecialRenderer {
          GL11.glPushMatrix();
          //rotate to avoid model rendering upside down
          GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-         
+         this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
          //pop both sections off the render stack
          GL11.glPopMatrix();
          GL11.glPopMatrix();
