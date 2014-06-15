@@ -62,7 +62,7 @@ public class EmeraldCasino
   		//Initialise Blocks and TileEntities
   		blockCardDeck = new blockCardDeck().setBlockName("CardDeckBlock").setCreativeTab(tabEC);
   		GameRegistry.registerBlock(blockCardDeck, "cardDeckBlock");
-  		GameRegistry.registerTileEntity(TileEntityCardBlock.class, "tileEntityCardDeck");
+  		//GameRegistry.registerTileEntity(TileEntityCardBlock.class, "tileEntityCardDeck");
     	
   	}
   	
@@ -70,6 +70,9 @@ public class EmeraldCasino
   	public void init(FMLInitializationEvent event)
   	{
   	//Add Relevant Recipes
+  			proxy.registerRenderers();
+  			GameRegistry.registerTileEntity(TileEntityCardBlock.class, "tileEntityCardDeck");
+  			
   			GameRegistry.addRecipe(new ShapelessOreRecipe( new ItemStack(itemCardDeck), "dyeBlack", "dyeRed", new ItemStack(Items.paper,52)));
   	  		
   	}
@@ -77,7 +80,7 @@ public class EmeraldCasino
     @EventHandler
 	public void load(FMLLoadEvent event)
   	{
-		proxy.registerRenderers();
+		
 
 	}
   	

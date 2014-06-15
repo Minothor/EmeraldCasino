@@ -1,7 +1,9 @@
 package EmeraldCasino.blocks;
 
+import java.util.Random;
+
 import EmeraldCasino.blocks.tileEntities.TileEntityCardBlock;
-import EmeraldCasino.cards.*;
+import EmeraldCasino.games.cards.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.tileentity.TileEntity;
@@ -11,6 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -58,7 +61,7 @@ public class blockCardDeck extends BlockContainer{
 	@SideOnly(Side.CLIENT)
 	protected IIcon[] icons;
 
-	
+	@Override
 	public int onBlockPlaced (World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metaD)
 	{
 		
@@ -76,11 +79,12 @@ public class blockCardDeck extends BlockContainer{
         case 5:
             metaD = 4;
             break;
-        }
-		world.setBlockMetadataWithNotify(x, y, z, metaD,3);*/
+        }*/
+		world.setBlockMetadataWithNotify(x, y, z, metaD,3);
 		return metaD;
 	}
-
+	
+	
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata) {

@@ -1,4 +1,4 @@
-package EmeraldCasino.cards;
+package EmeraldCasino.games.cards;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.HashMap;

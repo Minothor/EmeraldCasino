@@ -1,5 +1,5 @@
 
-package EmeraldCasino.cards;
+package EmeraldCasino.games.cards;
 
 import java.util.ArrayList;
 import java.util.Collections;
