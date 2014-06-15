@@ -36,5 +36,9 @@ public class Player {
 	public Hand getHand(int index){
 		return this.hands.get(index);
 	}
-
+	
+	public EntityPlayer getPlayer(){
+		return this.player;
+	}
+	
 }

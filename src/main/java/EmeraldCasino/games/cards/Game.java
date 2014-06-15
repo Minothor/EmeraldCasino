@@ -27,7 +27,7 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 		
 	}
 	
-	protected void DealCards(){
+	public void DealCards(){
 		
 	}
 	
@@ -46,6 +46,11 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 	public void addPlayer(String username){
 		EntityPlayer player = server.getConfigurationManager().getPlayerForUsername(username);
 		this.players.add(new Player(player));
+	}
+	
+	public void removePlayer(String username){
+		EntityPlayer player = server.getConfigurationManager().getPlayerForUsername(username);
+		//this.players.remove((new Player(player));
 	}
 	
 	public String toString(ArrayList<Card> cards){
