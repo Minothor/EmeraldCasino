@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 
+
 public class Player {
 	ArrayList <Hand> hands = new ArrayList <Hand>();
 	EntityPlayer player;

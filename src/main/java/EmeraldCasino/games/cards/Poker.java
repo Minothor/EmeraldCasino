@@ -249,5 +249,11 @@ public class Poker extends Game {
 		
 		
 		return max;
+	}
+
+	@Override
+	public void EvalGame() {
+		// TODO Auto-generated method stub
+		
 	} 
 }

@@ -1,5 +1,8 @@
 package EmeraldCasino.blocks.tileEntities;
 
+import java.util.HashMap;
+import java.util.List;
+
 import EmeraldCasino.games.cards.ICardGame;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
@@ -7,8 +10,11 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCardBlock extends TileEntity {
-	private int GameID;
+	private int gameID;
 	private ICardGame game;
+	private List<String> players;
+	private HashMap<String, Integer> playerBalances;
+	private HashMap<String, Integer[][]> playerHands;
 
 
 	public TileEntityCardBlock() {
@@ -28,15 +34,38 @@ public class TileEntityCardBlock extends TileEntity {
 	public void writeToNBT(NBTTagCompound nbtTag)
 	{
 		super.writeToNBT(nbtTag);
-		nbtTag.setInteger("GameID", this.GameID);
+		nbtTag.setInteger("gameID", this.gameID);
+		nbtTag.setString("playerList", condensePlayers());
 	}
-
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTag)
 	{
 		super.readFromNBT(nbtTag);
-		this.GameID = nbtTag.getInteger("GameID");
+		this.gameID = nbtTag.getInteger("gameID");
 	}
+	
+	private String condensePlayers() {
+		String playerList="";
+		/*int count=1;
+		for (String playerName : players) {
+			playerList+=playerName;
+			count++;
+			if(count<players.size())
+				playerList+=",";
+		}*/
+		return playerList;
+	}
+	
+	private boolean expandPlayers(String playerList) {
+		String[] playerArray = playerList.split(",");
+		players.clear();
+		boolean successful= true;
+		for (String playerName : playerArray) {
+			successful = (successful && players.add(playerName));
+		}
+		return successful;
+	}
+	
 
 }

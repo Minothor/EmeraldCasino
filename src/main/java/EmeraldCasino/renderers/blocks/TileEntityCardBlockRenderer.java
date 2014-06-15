@@ -22,6 +22,9 @@ import EmeraldCasino.models.modelCardDeck;
  *Adapted from Flenix's Tutorial at:
  *http://www.minecraftforge.net/wiki/Rendering_a_Techne_Model_as_a_Block
  */
+
+//TODO: Cancel rendering if not visible
+//Current Idea: Player.yaw/pitch trigonometry && sky light
 public class TileEntityCardBlockRenderer extends TileEntitySpecialRenderer {
 	private final modelCardDeck model;
 	private final ResourceLocation texture;
