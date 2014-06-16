@@ -23,7 +23,7 @@ public class blockCardDeck extends BlockContainer{
 	
 	public blockCardDeck() {
 		super(Material.carpet);
-		setBlockName("BlockCardDeck");
+		setBlockName("cardDeck");
 		setStepSound(Block.soundTypeSnow);
 	}
 

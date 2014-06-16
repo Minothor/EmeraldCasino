@@ -34,6 +34,7 @@ public class TileEntityCardBlockRenderer extends TileEntitySpecialRenderer {
 		model = new modelCardDeck();
 		blockRenderId = RenderingRegistry.getNextAvailableRenderId();
 		texture = new ResourceLocation(EmeraldCasino.MODID+":textures/blocks/tileDeck.png");
+		
 	}
 
 
@@ -55,6 +56,7 @@ public class TileEntityCardBlockRenderer extends TileEntitySpecialRenderer {
          //pop both sections off the render stack
          GL11.glPopMatrix();
          GL11.glPopMatrix();
+         //System.out.println("FOV : "+Minecraft.getMinecraft().gameSettings.fovSetting);
 	}
 	 private void adjustLightFixture(World world, int x, int y, int z, Block block) {
          Tessellator tess = Tessellator.instance;

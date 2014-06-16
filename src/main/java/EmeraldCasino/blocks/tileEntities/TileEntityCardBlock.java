@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 
 import EmeraldCasino.games.cards.ICardGame;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityCardBlock extends TileEntity {
+public class TileEntityCardBlock extends TileEntity{
 	private int gameID;
 	private ICardGame game;
 	private List<String> players;
@@ -66,6 +69,8 @@ public class TileEntityCardBlock extends TileEntity {
 		}
 		return successful;
 	}
+
+
 	
 
 }

@@ -55,14 +55,13 @@ public class EmeraldCasino
 				return Item.getItemFromBlock(Blocks.emerald_block);
 			}
 		};
-		//Initalise Items
-  		itemCardDeck = new itemCardDeck().setUnlocalizedName("cardDeck").setCreativeTab(tabEC).setTextureName(MODID + ":" + "CardDeck");
-  		GameRegistry.registerItem(itemCardDeck, "cardDeck");
-  		
-  		//Initialise Blocks and TileEntities
+		//Initialise Blocks
   		blockCardDeck = new blockCardDeck().setBlockName("CardDeckBlock").setCreativeTab(tabEC);
   		GameRegistry.registerBlock(blockCardDeck, "cardDeckBlock");
-  		//GameRegistry.registerTileEntity(TileEntityCardBlock.class, "tileEntityCardDeck");
+  		
+  		//Initalise Items
+  		itemCardDeck = new itemCardDeck().setUnlocalizedName("cardDeck").setCreativeTab(tabEC).setTextureName(MODID + ":" + "CardDeck");
+  		GameRegistry.registerItem(itemCardDeck, "cardDeck");
     	
   	}
   	
