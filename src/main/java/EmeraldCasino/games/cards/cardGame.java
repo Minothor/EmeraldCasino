@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import EmeraldCasino.games.Game;
+import EmeraldCasino.games.cards.core.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
@@ -32,7 +33,7 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 		
 	}
 	
-	protected int[] EvalHand(List<Card> cards){
+	public int[] EvalHand(List<Card> cards){
 		int[] priority={};
 		List toEval=this.sortCards(cards);
 		

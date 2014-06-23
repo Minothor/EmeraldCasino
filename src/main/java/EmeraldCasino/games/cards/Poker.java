@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import EmeraldCasino.games.cards.core.*;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 
 
@@ -35,6 +37,7 @@ public class Poker extends cardGame {
 	public Poker() {
 		super();
 		gameName="5 Card Draw";
+		EmeraldCasino.CasinoRegistry.getInstance().registerGame(EmeraldCasino.games.gameType.CARD,this);
 	}
 	
 	/**
@@ -42,8 +45,8 @@ public class Poker extends cardGame {
 	 */
 	@Override
 	public void DealCards(){
-		for (int i = 0; i>players.size();i++){
-			this.players.get(i).getHand().addCard(this.deck.takeCard());			
+		for (Player player : players) {
+			player.addToHand(deck.takeCard());
 		}
 	}
 	
@@ -155,7 +158,7 @@ public class Poker extends cardGame {
 	 * 
 	 */
 	@Override
-	protected int[] EvalHand(List<Card> cards){
+	public int[] EvalHand(List<Card> cards){
 		int[] priority={1,0,0,0,0};
 		LinkedList<Card> toSort= new LinkedList<Card>();
 		List<Card> toEval;
@@ -259,7 +262,13 @@ public class Poker extends cardGame {
 	}
 
 	@Override
-	public void getPlayer(String username) {
+	public EntityPlayer getPlayer(String username) {
+		return null;
+		
+	}
+
+	@Override
+	public void setOwner(EntityPlayer owner) {
 		// TODO Auto-generated method stub
 		
 	}

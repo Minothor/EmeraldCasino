@@ -1,7 +1,9 @@
 package EmeraldCasino.items;
 
-import EmeraldCasino.EmeraldCasino;
+import EmeraldCasino.*;
 import EmeraldCasino.blocks.BlockHelper;
+import EmeraldCasino.blocks.tileEntities.TileEntityCardBlock;
+import EmeraldCasino.games.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -51,7 +53,9 @@ public class itemCardDeck extends Item{
 			if (temp!= null){
 				world.setBlock(target[0], target[1], target[2],temp);
 				world.setBlockMetadataWithNotify(target[0], target[1], target[2], stack.getItemDamage(), 2);
+				((TileEntityCardBlock)world.getTileEntity(target[0], target[1], target[2])).setOwner(player);
 				player.inventory.consumeInventoryItem(player.getCurrentEquippedItem().getItem());
+				System.out.println("Block owned by : "+((TileEntityCardBlock)world.getTileEntity(target[0], target[1], target[2])).getOwner());
 				return true;
 			}else{
 			System.out.println("Null Returned!");

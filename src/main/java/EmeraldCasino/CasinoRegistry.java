@@ -1,7 +1,9 @@
-package EmeraldCasino.games;
+package EmeraldCasino;
 
 import java.util.List;
 import java.util.Map;
+
+import EmeraldCasino.games.*;
 
 public class CasinoRegistry {
 	private static CasinoRegistry instance;
@@ -17,7 +19,7 @@ public class CasinoRegistry {
 		return instance;
 	}
 	
-	public boolean registerGame(IGame game)
+	public boolean registerGame(gameType type, IGame game)
 	{
 	
 		return false;

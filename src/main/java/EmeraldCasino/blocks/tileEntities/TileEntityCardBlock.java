@@ -16,6 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityCardBlock extends TileEntity{
 	private int gameID;
 	private cardGame game;
+	private String ownerDisplayName;
 	private List<String> players;
 	private HashMap<String, Integer> playerBalances;
 	private HashMap<String, Integer[][]> playerHands;
@@ -26,7 +27,17 @@ public class TileEntityCardBlock extends TileEntity{
 		System.out.println("Tile Entity Created!");
 	}
 	
+	public void setOwner(EntityPlayer owner)
+	{
+		String ownerName = owner.getDisplayName();
+		if (ownerName!=null)
+			this.ownerDisplayName = ownerName;
+	}
 	
+	public String getOwner()
+	{
+		return this.ownerDisplayName;
+	}
 
 	@Override
 	public Packet getDescriptionPacket() {

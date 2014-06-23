@@ -1,4 +1,4 @@
-package EmeraldCasino.games.cards;
+package EmeraldCasino.games.cards.core;
 
 import java.util.Comparator;
 
