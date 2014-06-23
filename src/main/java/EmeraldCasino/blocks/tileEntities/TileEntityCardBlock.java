@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import EmeraldCasino.games.cards.ICardGame;
+import EmeraldCasino.games.cards.cardGame;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCardBlock extends TileEntity{
 	private int gameID;
-	private ICardGame game;
+	private cardGame game;
 	private List<String> players;
 	private HashMap<String, Integer> playerBalances;
 	private HashMap<String, Integer[][]> playerHands;
@@ -24,6 +25,8 @@ public class TileEntityCardBlock extends TileEntity{
 		super();
 		System.out.println("Tile Entity Created!");
 	}
+	
+	
 
 	@Override
 	public Packet getDescriptionPacket() {
@@ -68,6 +71,12 @@ public class TileEntityCardBlock extends TileEntity{
 			successful = (successful && players.add(playerName));
 		}
 		return successful;
+	}
+
+
+
+	public void activatedBy(EntityPlayer player) {
+		System.out.println("I'm Different!");		
 	}
 
 

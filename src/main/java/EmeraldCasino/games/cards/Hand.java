@@ -25,17 +25,17 @@ public class Hand {
 		return temp;
 	}
 	
-	public void play(Game game){
+	public void play(cardGame game){
 		play(game,this.cards);	
 	}
 	
-	public void play(Game game, Card card){
+	public void play(cardGame game, Card card){
 		List<Card> cards = new LinkedList<>();
 		cards.add(card);
 		play(game,cards);	
 	}
 	
-	public void play(Game game, List<Card> cards){
+	public void play(cardGame game, List<Card> cards){
 		int[] priority=game.EvalHand(cards);
 		System.out.println("Hand Priority: ");
 		for (int i : priority) {

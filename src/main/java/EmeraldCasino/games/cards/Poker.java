@@ -15,7 +15,7 @@ import net.minecraft.init.Items;
  * @author Minothor
  * @version 1.0
  */
-public class Poker extends Game {
+public class Poker extends cardGame {
 	
 	/** Booleans for flush and straight. Initialised to false. */
 	protected boolean flush = false, straight = false;
@@ -34,6 +34,7 @@ public class Poker extends Game {
 	 */
 	public Poker() {
 		super();
+		gameName="5 Card Draw";
 	}
 	
 	/**
@@ -255,5 +256,11 @@ public class Poker extends Game {
 	public void EvalGame() {
 		// TODO Auto-generated method stub
 		
-	} 
+	}
+
+	@Override
+	public void getPlayer(String username) {
+		// TODO Auto-generated method stub
+		
+	}
 }

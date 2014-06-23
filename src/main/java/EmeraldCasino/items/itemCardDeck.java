@@ -1,6 +1,7 @@
 package EmeraldCasino.items;
 
 import EmeraldCasino.EmeraldCasino;
+import EmeraldCasino.blocks.BlockHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,18 +35,23 @@ public class itemCardDeck extends Item{
 	
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
+		int[] target = BlockHelper.getPlacementTarget(x,y,z,side);
+		
 		if(player.isSneaking())
 		{
 		incrementDamage(stack);
 		System.out.println("Dmg Val: "+stack.getItemDamage());
+		System.out.println("Block ID: "+GameRegistry.findUniqueIdentifierFor(world.getBlock(x, y, z)));
+		System.out.println("Side: "+side);
 		return true;
 		}
-		else if((world.getBlock(x, y, z)!=Blocks.air)&&(world.getBlock(x, y+1, z)==Blocks.air))
+		else if((world.getBlock(target[0], target[1]-1, target[2])!=Blocks.air)&&(world.getBlock(target[0], target[1], target[2])==Blocks.air))
 			{
-			Block temp =  GameRegistry.findBlock(EmeraldCasino.MODID, "cardDeck");
+			Block temp =  GameRegistry.findBlock(EmeraldCasino.MODID, "cardDeckBlock");
 			if (temp!= null){
-				world.setBlock(x, y+1, z,temp);
-				//world.setBlockMetadataWithNotify(x, y+1, z, stack.getItemDamage(), 2);
+				world.setBlock(target[0], target[1], target[2],temp);
+				world.setBlockMetadataWithNotify(target[0], target[1], target[2], stack.getItemDamage(), 2);
+				player.inventory.consumeInventoryItem(player.getCurrentEquippedItem().getItem());
 				return true;
 			}else{
 			System.out.println("Null Returned!");

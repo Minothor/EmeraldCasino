@@ -14,11 +14,11 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class blockCardDeck extends BlockContainer{
-	private Game game;
 	
 	
 	public blockCardDeck() {
@@ -27,6 +27,21 @@ public class blockCardDeck extends BlockContainer{
 		setStepSound(Block.soundTypeSnow);
 	}
 
+	@Override
+	public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z) {
+		return false;
+	}
+	
+	@Override
+	public boolean canDropFromExplosion(Explosion p_149659_1_) {
+		return false;
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float blockX, float blockY, float blockZ) {
+		((TileEntityCardBlock)world.getTileEntity(x, y, z)).activatedBy(player);
+		return true;
+	}
 	
 	@SideOnly(Side.CLIENT)
 	@Override

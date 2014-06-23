@@ -60,7 +60,7 @@ public class EmeraldCasino
   		GameRegistry.registerBlock(blockCardDeck, "cardDeckBlock");
   		
   		//Initalise Items
-  		itemCardDeck = new itemCardDeck().setUnlocalizedName("cardDeck").setCreativeTab(tabEC).setTextureName(MODID + ":" + "CardDeck");
+  		itemCardDeck = new itemCardDeck().setUnlocalizedName("cardDeck").setCreativeTab(tabEC).setTextureName(MODID + ":" + "CardDeck").setMaxStackSize(1);
   		GameRegistry.registerItem(itemCardDeck, "cardDeck");
     	
   	}

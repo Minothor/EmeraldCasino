@@ -6,11 +6,12 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import EmeraldCasino.games.Game;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 
-public abstract class Game implements ICardGame{
+public abstract class cardGame extends Game implements ICardGame{
 
 protected static MinecraftServer server = MinecraftServer.getServer();
  protected List<Card> tableCards = new LinkedList<>();
@@ -23,8 +24,8 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 	 * Default Constructor
 	 * 
 	 */
-	public Game() {
-		
+	public cardGame() {
+		super();
 	}
 	
 	public void DealCards(){
