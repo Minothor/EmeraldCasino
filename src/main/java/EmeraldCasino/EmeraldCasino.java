@@ -40,12 +40,7 @@ public class EmeraldCasino
   //Declare Tab
   	//Set Creative Tab Icon
   	public static CreativeTabs tabEC;
-
-  	//Declare Items
-  	public static Item itemCardDeck;
-
-  	//Declare Blocks
-  	public static Block blockCardDeck;
+  	
     
   	@EventHandler
   	public void preInit(FMLPreInitializationEvent event)
@@ -55,14 +50,10 @@ public class EmeraldCasino
 				return Item.getItemFromBlock(Blocks.emerald_block);
 			}
 		};
-		//Initialise Blocks
-  		blockCardDeck = new blockCardDeck().setBlockName("CardDeckBlock").setCreativeTab(tabEC);
-  		GameRegistry.registerBlock(blockCardDeck, "cardDeckBlock");
-  		
-  		//Initalise Items
-  		itemCardDeck = new itemCardDeck().setUnlocalizedName("cardDeck").setCreativeTab(tabEC).setTextureName(MODID + ":" + "CardDeck").setMaxStackSize(1);
-  		GameRegistry.registerItem(itemCardDeck, "cardDeck");
+		
+		ECBlocks.register(tabEC);
     	
+		ECItems.register(tabEC);
   	}
   	
   	@EventHandler
@@ -70,9 +61,10 @@ public class EmeraldCasino
   	{
   	//Add Relevant Recipes
   			proxy.registerRenderers();
-  			GameRegistry.registerTileEntity(TileEntityCardBlock.class, "tileEntityCardDeck");
   			
-  			GameRegistry.addRecipe(new ShapelessOreRecipe( new ItemStack(itemCardDeck), "dyeBlack", "dyeRed", new ItemStack(Items.paper,52)));
+  			ECTileEntities.register();
+  			
+  			ECRecipes.register();
   	  		
   	}
     
