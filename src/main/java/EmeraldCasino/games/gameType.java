@@ -1,5 +1,5 @@
 package EmeraldCasino.games;
 
 public enum gameType {
-	CARD, TABLE, SLOT, CUSTOM;
+	CARD, TABLE, SLOT, DICE, CUSTOM;
 }
