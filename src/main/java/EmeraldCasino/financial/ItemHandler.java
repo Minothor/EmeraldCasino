@@ -89,7 +89,7 @@ public final class ItemHandler {
 	 */
 	public static List<ItemStack> withdrawItems(int inputNonary)
 	{	
-		List<ItemStack> ReturnItems = new ArrayList<>(5);
+		List<ItemStack> ReturnItems = new ArrayList<ItemStack>(5);
 		
 		//safety checks
 		int emBlocks = (inputNonary/10000);

@@ -15,9 +15,9 @@ import net.minecraft.server.MinecraftServer;
 public abstract class cardGame extends Game implements ICardGame{
 
 protected static MinecraftServer server = MinecraftServer.getServer();
- protected List<Card> tableCards = new LinkedList<>();
+ protected List<Card> tableCards = new LinkedList<Card>();
  protected Hand dealerHand = new Hand();
- protected List<Player> players = new LinkedList<>();
+ protected List<Player> players = new LinkedList<Player>();
  protected Deck deck = new Deck();
  private int[] buyIn={0,0};
  

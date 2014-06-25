@@ -23,7 +23,7 @@ public class Poker extends cardGame {
 	protected boolean flush = false, straight = false;
 	
 	/** List of Integers for 4 of a Kind card values. */
-	protected LinkedList<Integer> oK4 =new LinkedList<>();
+	protected LinkedList<Integer> oK4 =new LinkedList<Integer>();
 	
 	/** List of Integers for 3 of a Kind card values. */
 	protected LinkedList<Integer> oK3 =new LinkedList<Integer>();

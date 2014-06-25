@@ -31,7 +31,7 @@ public class Hand {
 	}
 	
 	public void play(cardGame game, Card card){
-		List<Card> cards = new LinkedList<>();
+		List<Card> cards = new LinkedList<Card>();
 		cards.add(card);
 		play(game,cards);	
 	}
