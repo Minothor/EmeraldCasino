@@ -65,6 +65,8 @@ public class EmeraldCasino
   			ECTileEntities.register();
   			
   			ECRecipes.register();
+  			
+  			ECEvents.register();
   	  		
   	}
     
