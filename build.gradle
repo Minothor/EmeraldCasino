@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.2-1.0"
+version = "1.7.2-1.0Alpha"
 group= "EmeraldCasino" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "EmeraldCasino"
 
@@ -43,5 +43,13 @@ processResources
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+	
+	// copy assets into jar
+    from("src") {
+		exclude 'main/**'
+		exclude '**/source/**'
+		exclude '**/thumbs.db'
+		
     }
 }
