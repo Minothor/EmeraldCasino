@@ -1,4 +1,4 @@
-package EmeraldCasino.proxies;
+package emeraldCasino.proxies;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

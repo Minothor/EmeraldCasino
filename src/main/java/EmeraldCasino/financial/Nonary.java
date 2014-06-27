@@ -1,4 +1,4 @@
-package EmeraldCasino.financial;
+package emeraldCasino.financial;
 /**
  * Base-9 calculations library for working with values based off gold and emerald items.
  * @author Minothor

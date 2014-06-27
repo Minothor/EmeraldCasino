@@ -1,4 +1,4 @@
-package EmeraldCasino.threadTest;
+package emeraldCasino.threadTest;
 
 public class main 
 {

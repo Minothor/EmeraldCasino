@@ -1,4 +1,4 @@
-package EmeraldCasino.games.cards.core;
+package emeraldCasino.api.games.card.core;
 
 import java.util.ArrayList;
 

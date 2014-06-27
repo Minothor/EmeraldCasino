@@ -18,8 +18,8 @@ buildscript {
 apply plugin: 'forge'
 
 version = "1.7.2-1.0Alpha"
-group= "EmeraldCasino" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "EmeraldCasino"
+group= "emeraldCasino" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "emeraldCasino"
 
 minecraft {
     version = "1.7.2-10.12.2.1121"

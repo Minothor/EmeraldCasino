@@ -1,10 +1,10 @@
-package EmeraldCasino;
+package emeraldCasino;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import EmeraldCasino.blocks.blockCardDeck;
-import EmeraldCasino.items.itemCardDeck;
 import cpw.mods.fml.common.registry.GameRegistry;
+import emeraldCasino.blocks.blockCardDeck;
+import emeraldCasino.items.itemCardDeck;
 
 public class ECBlocks {
 	public static Block blockCardDeck;

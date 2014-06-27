@@ -1,4 +1,4 @@
-package EmeraldCasino;
+package emeraldCasino;
 
 import javax.imageio.spi.RegisterableService;
 

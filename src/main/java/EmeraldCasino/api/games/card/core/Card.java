@@ -1,4 +1,4 @@
-package EmeraldCasino.games.cards.core;
+package emeraldCasino.api.games.card.core;
 
 import java.util.Comparator;
 
@@ -15,7 +15,7 @@ public class Card{
 		this.house=i;
 		this.value=j;
 	}
-	
+
 	public int getValue(){
 		return this.value;
 	}

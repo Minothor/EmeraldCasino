@@ -1,4 +1,4 @@
-package EmeraldCasino.renderers.items;
+package emeraldCasino.renderers.items;
 
 public class ItemCardHandRenderer {
 

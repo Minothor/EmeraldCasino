@@ -1,4 +1,4 @@
-package EmeraldCasino.games.cards.core;
+package emeraldCasino.api.games.card.core;
 
 
 
@@ -11,6 +11,26 @@ public class Deck {
 	private List<Card> cards = new LinkedList<Card>();
 	private int deckSize = 52;
 	public Deck(){
+		build();
+	}
+	
+	public void burn(Card card)
+	{
+		try{
+		cards.remove(card);
+		System.gc();
+		} catch (Error e) {
+			System.err.println("Call to Burn(Card) resulted in error: "+e.getMessage());
+		}
+	}
+	
+	public void burn()
+	{
+		cards.remove(0);
+		System.gc();
+	}
+
+	protected void build() {
 		byte house=1, value=1;
 		for(byte i=0;i<deckSize;i++){
 			cards.add(new Card(house,value));

@@ -1,4 +1,4 @@
-package EmeraldCasino.games;
+package emeraldCasino.api.games;
 
 import net.minecraft.entity.player.EntityPlayer;
 

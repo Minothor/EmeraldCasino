@@ -1,4 +1,4 @@
-package EmeraldCasino.threadTest;
+package emeraldCasino.threadTest;
 
 import java.io.IOException;
 import java.nio.CharBuffer;

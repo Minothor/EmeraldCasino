@@ -1,11 +1,6 @@
-package EmeraldCasino;
+package emeraldCasino;
 
 //Mod Imports
-import EmeraldCasino.blocks.tileEntities.*;
-import EmeraldCasino.blocks.*;
-import EmeraldCasino.items.*;
-import EmeraldCasino.proxies.*;
-import EmeraldCasino.financial.*;
 
 //Item/Block related Imports
 import net.minecraft.block.Block;
@@ -23,6 +18,11 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.registry.GameRegistry;
+import emeraldCasino.blocks.*;
+import emeraldCasino.blocks.tileEntities.*;
+import emeraldCasino.financial.*;
+import emeraldCasino.items.*;
+import emeraldCasino.proxies.*;
 
 @Mod(modid = EmeraldCasino.MODID, name = EmeraldCasino.NAME, version = EmeraldCasino.VERSION)
 public class EmeraldCasino
@@ -34,7 +34,7 @@ public class EmeraldCasino
     @Instance(value = "emeraldcasino")
 	public static EmeraldCasino instance;
     
-    @SidedProxy(clientSide="EmeraldCasino.proxies.ClientProxy", serverSide="EmeraldCasino.proxies.CommonProxy")
+    @SidedProxy(clientSide="emeraldCasino.proxies.ClientProxy", serverSide="emeraldCasino.proxies.CommonProxy")
     public static CommonProxy proxy;
     
   //Declare Tab

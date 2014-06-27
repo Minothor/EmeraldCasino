@@ -1,10 +1,10 @@
-package EmeraldCasino.blocks.tileEntities;
+package emeraldCasino.blocks.tileEntities;
 
 import java.util.HashMap;
 import java.util.List;
 
-import EmeraldCasino.games.cards.ICardGame;
-import EmeraldCasino.games.cards.cardGame;
+import emeraldCasino.api.games.card.ACardGame;
+import emeraldCasino.api.games.card.ICardGame;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -15,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCardBlock extends TileEntity{
 	private int gameID;
-	private cardGame game;
+	private ACardGame game;
 	private String ownerDisplayName;
 	private List<String> players;
 	private HashMap<String, Integer> playerBalances;

@@ -1,12 +1,12 @@
-package EmeraldCasino.games.cards;
+package emeraldCasino.api.games.card;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import EmeraldCasino.games.IGame;
-import EmeraldCasino.games.cards.core.*;
+import emeraldCasino.api.games.IGame;
+import emeraldCasino.api.games.card.core.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 

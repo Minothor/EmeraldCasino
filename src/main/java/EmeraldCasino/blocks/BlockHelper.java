@@ -1,4 +1,4 @@
-package EmeraldCasino.blocks;
+package emeraldCasino.blocks;
 
 public class BlockHelper {
 	private BlockHelper() {

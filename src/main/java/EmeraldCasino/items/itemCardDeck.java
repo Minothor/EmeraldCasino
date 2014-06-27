@@ -1,10 +1,10 @@
-package EmeraldCasino.items;
+package emeraldCasino.items;
 
-import EmeraldCasino.*;
-import EmeraldCasino.blocks.BlockHelper;
-import EmeraldCasino.blocks.tileEntities.TileEntityCardBlock;
-import EmeraldCasino.games.*;
 import cpw.mods.fml.common.registry.GameRegistry;
+import emeraldCasino.*;
+import emeraldCasino.blocks.BlockHelper;
+import emeraldCasino.blocks.tileEntities.TileEntityCardBlock;
+import emeraldCasino.games.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

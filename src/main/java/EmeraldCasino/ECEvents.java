@@ -1,7 +1,7 @@
-package EmeraldCasino;
+package emeraldCasino;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import EmeraldCasino.events.*;
+import emeraldCasino.events.*;
 
 public class ECEvents {
 

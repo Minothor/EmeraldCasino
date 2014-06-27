@@ -1,4 +1,4 @@
-package EmeraldCasino.items;
+package emeraldCasino.items;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

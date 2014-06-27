@@ -1,7 +1,7 @@
-package EmeraldCasino;
+package emeraldCasino;
 
-import EmeraldCasino.blocks.tileEntities.TileEntityCardBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
+import emeraldCasino.blocks.tileEntities.TileEntityCardBlock;
 
 public class ECTileEntities {
 

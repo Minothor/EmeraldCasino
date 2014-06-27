@@ -1,4 +1,4 @@
-package EmeraldCasino.events;
+package emeraldCasino.events;
 
 
 import java.awt.Event;

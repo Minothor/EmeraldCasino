@@ -1,8 +1,10 @@
-package EmeraldCasino.renderers.blocks;
+package emeraldCasino.renderers.blocks;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import emeraldCasino.EmeraldCasino;
+import emeraldCasino.models.modelCardDeck;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -12,8 +14,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import EmeraldCasino.EmeraldCasino;
-import EmeraldCasino.models.modelCardDeck;
 
 /**
  * 

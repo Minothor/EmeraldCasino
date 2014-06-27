@@ -1,8 +1,8 @@
-package EmeraldCasino.games;
+package emeraldCasino.api.games;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-public abstract class Game implements IGame {
+public abstract class AGame implements IGame {
 	protected String gameName;
 	protected String ownerName;
 	

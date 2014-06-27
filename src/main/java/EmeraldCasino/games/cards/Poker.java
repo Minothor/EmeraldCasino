@@ -1,4 +1,4 @@
-package EmeraldCasino.games.cards;
+package emeraldCasino.games.cards;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.HashMap;
@@ -7,7 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import EmeraldCasino.games.cards.core.*;
+import emeraldCasino.api.games.card.*;
+import emeraldCasino.api.games.card.core.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 
@@ -17,7 +18,7 @@ import net.minecraft.init.Items;
  * @author Minothor
  * @version 1.0
  */
-public class Poker extends cardGame {
+public class Poker extends ACardGame {
 	
 	/** Booleans for flush and straight. Initialised to false. */
 	protected boolean flush = false, straight = false;
@@ -37,7 +38,7 @@ public class Poker extends cardGame {
 	public Poker() {
 		super();
 		gameName="5 Card Draw";
-		EmeraldCasino.CasinoRegistry.getInstance().registerGame(EmeraldCasino.games.gameType.CARD,this);
+		emeraldCasino.CasinoRegistry.getInstance().registerGame(emeraldCasino.api.games.EGameType.CARD,this);
 	}
 	
 	/**

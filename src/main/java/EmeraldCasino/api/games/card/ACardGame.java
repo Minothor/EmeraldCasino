@@ -1,18 +1,19 @@
 
-package EmeraldCasino.games.cards;
+package emeraldCasino.api.games.card;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import EmeraldCasino.games.Game;
-import EmeraldCasino.games.cards.core.*;
+import emeraldCasino.api.games.*;
+import emeraldCasino.api.games.card.*;
+import emeraldCasino.api.games.card.core.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 
-public abstract class cardGame extends Game implements ICardGame{
+public abstract class ACardGame extends AGame implements ICardGame{
 
 protected static MinecraftServer server = MinecraftServer.getServer();
  protected List<Card> tableCards = new LinkedList<Card>();
@@ -25,7 +26,7 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 	 * Default Constructor
 	 * 
 	 */
-	public cardGame() {
+	public ACardGame() {
 		super();
 	}
 	

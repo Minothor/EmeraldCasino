@@ -1,11 +1,11 @@
-package EmeraldCasino.blocks;
+package emeraldCasino.blocks;
 
 import java.util.Random;
 
-import EmeraldCasino.blocks.tileEntities.TileEntityCardBlock;
-import EmeraldCasino.games.cards.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import emeraldCasino.blocks.tileEntities.TileEntityCardBlock;
+import emeraldCasino.games.cards.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.block.*;
