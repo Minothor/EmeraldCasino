@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import emeraldCasino.api.games.EGameType;
 import emeraldCasino.api.games.card.*;
 import emeraldCasino.api.games.card.core.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,7 +39,7 @@ public class Poker extends ACardGame {
 	public Poker() {
 		super();
 		gameName="5 Card Draw";
-		emeraldCasino.CasinoRegistry.getInstance().registerGame(emeraldCasino.api.games.EGameType.CARD,this);
+		emeraldCasino.CasinoRegistry.getInstance().registerGame(EGameType.CARD,this);
 	}
 	
 	/**
