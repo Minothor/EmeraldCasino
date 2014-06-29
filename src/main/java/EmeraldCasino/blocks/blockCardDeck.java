@@ -54,6 +54,12 @@ public class blockCardDeck extends BlockContainer{
 	}
 	
 	@Override
+	public ItemStack getPickBlock(net.minecraft.util.MovingObjectPosition target, World world, int x, int y, int z) {
+		ItemStack result = new ItemStack(GameRegistry.findItem(EmeraldCasino.MODID, "cardDeck"),1);
+		return result;
+	};
+	
+	@Override
 	public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z) {
 		return false;
 	}
