@@ -15,4 +15,6 @@ public interface ICardGame extends IGame {
 		public void DealCards();
 		
 		public String toString(ArrayList<Card> cards);
+		
+		public String getDeckTex();
 }

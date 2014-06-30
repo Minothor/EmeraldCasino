@@ -34,7 +34,7 @@ public class blockCardDeck extends BlockContainer{
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
     {
-		return AxisAlignedBB.getBoundingBox(x+0.2, y, z+0.2, x+0.8, y+0.5, z+0.8);
+		return AxisAlignedBB.getBoundingBox(x+0.2, y, z+0.2, x+0.8, y+0.3, z+0.8);
     }
 	
 	@Override

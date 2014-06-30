@@ -19,7 +19,7 @@ protected static MinecraftServer server = MinecraftServer.getServer();
  protected List<Card> tableCards = new LinkedList<Card>();
  protected Hand dealerHand = new Hand();
  protected List<Player> players = new LinkedList<Player>();
- protected Deck deck = new Deck();
+ protected IDeck deck;
  private int[] buyIn={0,0};
  
 	/**
@@ -63,5 +63,10 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 		}
 		return result;
 	}
+	
+	@Override
+		public String getDeckTex() {
+			return deck.getTexture();
+		}
 	
 }
