@@ -35,12 +35,12 @@ public class Player
 		splitHand(0,cardIndex);
 	}
 
-	public void addToHand(Card card)
+	public void addToHand(ICard card)
 	{
 		addToHand(0,card);
 	}
 	
-	public void addToHand(int handIndex, Card card)
+	public void addToHand(int handIndex, ICard card)
 	{
 		if (handIndex>=this.hands.size())
 		{

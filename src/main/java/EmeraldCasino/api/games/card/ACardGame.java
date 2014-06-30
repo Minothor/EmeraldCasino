@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import emeraldCasino.api.games.*;
 import emeraldCasino.api.games.card.*;
@@ -15,8 +16,9 @@ import net.minecraft.server.MinecraftServer;
 
 public abstract class ACardGame extends AGame implements ICardGame{
 
-protected static MinecraftServer server = MinecraftServer.getServer();
- protected List<Card> tableCards = new LinkedList<Card>();
+protected MinecraftServer server = MinecraftServer.getServer();
+protected String gameOwner;
+ protected List<ICard> tableCards = new LinkedList<ICard>();
  protected Hand dealerHand = new Hand();
  protected List<Player> players = new LinkedList<Player>();
  protected IDeck deck;
@@ -34,15 +36,15 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 		
 	}
 	
-	public int[] EvalHand(List<Card> cards){
+	public int[] EvalHand(List<ICard> cards){
 		int[] priority={};
 		List toEval=this.sortCards(cards);
 		
 		return priority;
 	}
 	
-	protected List<Card> sortCards(List<Card> toSort){
-		Collections.sort(toSort,Card.compareValue);
+	protected List<ICard> sortCards(List<ICard> toSort){
+		Collections.sort(toSort,ACard.compareValue);
 		return toSort;
 	}
 	
@@ -56,7 +58,24 @@ protected static MinecraftServer server = MinecraftServer.getServer();
 		//this.players.remove((new Player(player));
 	}
 	
-	public String toString(ArrayList<Card> cards){
+	@Override
+	public void EvalGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public EntityPlayer getPlayer(String username) {
+		return null;
+		
+	}
+
+	@Override
+	public void setOwner(EntityPlayer owner) {
+		this.gameOwner = owner.getDisplayName();	
+	}
+	
+	public String toString(ArrayList<ICard> cards){
 		String result="";
 		for(int j = 0;j<cards.size();j++){
 			result+=cards.get(j).toString()+"|";

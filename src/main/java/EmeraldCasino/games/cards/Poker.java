@@ -38,12 +38,12 @@ public class Poker extends ACardGame {
 	 */
 	public Poker() {
 		super();
-		gameName="5 Card Draw";
+		gameName="5 ICard Draw";
 		emeraldCasino.CasinoRegistry.getInstance().registerGame(EGameType.CARD,this);
 	}
 	
 	/**
-	 * Deals 1 Card to each Player from the in game Deck.
+	 * Deals 1 ICard to each Player from the in game Deck.
 	 */
 	@Override
 	public void DealCards(){
@@ -55,15 +55,15 @@ public class Poker extends ACardGame {
 	/**
 	 * Clears the oK# lists and fills them with the values derived from the cards list.
 	 * 
-	 * Constructs a HashMap with Card Values as Keys and increments the associated Value to count.
+	 * Constructs a HashMap with ICard Values as Keys and increments the associated Value to count.
 	 *
 	 * @param toEval The List of cards to parse.
 	 */
-	protected void checkMultis(List<Card> toEval){
+	protected void checkMultis(List<ICard> toEval){
 		oK2.clear();
 		int cardValue;
 		Map<Integer,Integer> cardVals= new HashMap<Integer,Integer>();
-		for (Card card : toEval) {
+		for (ICard card : toEval) {
 			cardValue=card.getValue();
 			Integer val = cardVals.get(cardValue);
 			val = (val==null?0:val);
@@ -93,7 +93,7 @@ public class Poker extends ACardGame {
 	 * @param cards The list of cards to be evaluated
 	 * @return true If it reaches the end of the list and the difference is 1 for a standard Straight or 9 for a Royal Flush
 	 */
-	protected boolean checkStraight(List<Card> cards){
+	protected boolean checkStraight(List<ICard> cards){
 		int diff=1;
 		int size=cards.size();
 		boolean result = false;
@@ -113,7 +113,7 @@ public class Poker extends ACardGame {
 	 * @param cards The List of cards to Evaluate.
 	 * @return true, If successful the difference between tested cards remains 0
 	 */
-	protected boolean checkFlush(List<Card> cards){
+	protected boolean checkFlush(List<ICard> cards){
 		int size=cards.size();
 		int diff=0;
 		
@@ -134,15 +134,15 @@ public class Poker extends ACardGame {
 	 * @param toEval A List of cards to be evaluated.
 	 * @return true if the Max card value is 13 and the Min card value is 1
 	 */
-	protected boolean checkRoyal(List<Card> toEval){
-		Card max = Collections.max(toEval, Card.compareValue);
-		Card min = Collections.min(toEval, Card.compareValue);
+	protected boolean checkRoyal(List<ICard> toEval){
+		ICard max = Collections.max(toEval, ACard.compareValue);
+		ICard min = Collections.min(toEval, ACard.compareValue);
 		return (max.getValue()==13)&&(min.getValue()==1);
 	}
 	
 	
 	/**
-	 * EvalHand(List<Card>)
+	 * EvalHand(List<ICard>)
 	 * Evaluates the Hand passed.
 	 * 
 	 * @param cards
@@ -151,7 +151,7 @@ public class Poker extends ACardGame {
 	 * @return priority[]
 	 * Returns an array of integers.
 	 * <ul>
-	 * <li>First value is the Hand value, ranging from HighCard:1 to RoyalFlush:10</li>
+	 * <li>First value is the Hand value, ranging from HighICard:1 to RoyalFlush:10</li>
 	 * <li>Second value is the card value of 4 of a Kind, ranging from 2 to 14 (high ace)</li>
 	 * <li>Third value is the card value of 3 of a Kind, ranging from 2 to 14 (high ace)</li>
 	 * <li>Fourth value is the Highest pair value, ranging from 2 to 14 (high ace)</li>
@@ -160,10 +160,10 @@ public class Poker extends ACardGame {
 	 * 
 	 */
 	@Override
-	public int[] EvalHand(List<Card> cards){
+	public int[] EvalHand(List<ICard> cards){
 		int[] priority={1,0,0,0,0};
-		LinkedList<Card> toSort= new LinkedList<Card>();
-		List<Card> toEval;
+		LinkedList<ICard> toSort= new LinkedList<ICard>();
+		List<ICard> toEval;
 		toSort.addAll(tableCards);
 		toSort.addAll(cards);
 		toEval = sortCards(toSort);
@@ -221,16 +221,16 @@ public class Poker extends ACardGame {
 	}
 	
 	/**
-	 * Parses a list of Card values and returns the maximum value.
+	 * Parses a list of ICard values and returns the maximum value.
 	 * Treats 1 (ace) as highest value
 	 *
 	 * @param toEval the list of cards
 	 * @return the maximum value of the cards parsed.
 	 */
-	protected int getMax(List<Card> toEval) {
+	protected int getMax(List<ICard> toEval) {
 		int[] intList= new int[toEval.size()];
 		int index = 0;
-		for (Card card : toEval) {
+		for (ICard card : toEval) {
 		intList[index++]=card.getValue();
 		}
 		

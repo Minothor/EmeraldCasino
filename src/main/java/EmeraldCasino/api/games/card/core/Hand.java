@@ -8,20 +8,20 @@ import net.minecraft.entity.player.EntityPlayer;
 
 
 public class Hand {
-	private ArrayList<Card> cards = new ArrayList<Card>();
+	private ArrayList<ICard> cards = new ArrayList<ICard>();
 	
 	public Hand() {
 	}
-	public void addCard(Card card){
+	public void addCard(ICard card){
 		cards.add(card);
 	}
 	
-	public Card removeCard(){
+	public ICard removeCard(){
 		return removeCard(0);
 	}
 	
-	public Card removeCard(int index){
-		Card  temp = cards.get(index);
+	public ICard removeCard(int index){
+		ICard  temp = cards.get(index);
 		cards.remove(index);
 		return temp;
 	}
@@ -30,13 +30,13 @@ public class Hand {
 		play(game,this.cards);	
 	}
 	
-	public void play(ACardGame game, Card card){
-		List<Card> cards = new LinkedList<Card>();
+	public void play(ACardGame game,ICard card){
+		List<ICard> cards = new LinkedList<ICard>();
 		cards.add(card);
 		play(game,cards);	
 	}
 	
-	public void play(ACardGame game, List<Card> cards){
+	public void play(ACardGame game, List<ICard> cards){
 		int[] priority=game.EvalHand(cards);
 		System.out.println("Hand Priority: ");
 		for (int i : priority) {
