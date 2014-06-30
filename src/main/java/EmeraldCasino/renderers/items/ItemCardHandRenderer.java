@@ -20,7 +20,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 public class ItemCardHandRenderer implements IItemRenderer {
 	
 	public ItemCardHandRenderer() {
-		itemRenderId = RenderingRegistry.getNextAvailableRenderId();
+		//itemRenderId = RenderingRegistry.getNextAvailableRenderId();
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType renderType, ItemStack item, Object... obj) {
-		GL11.glt
+		
 		
 		/*
 		 * Vanilla Map Rendering -- to Modify
@@ -44,26 +44,26 @@ public class ItemCardHandRenderer implements IItemRenderer {
         	
             GL11.glPushMatrix();
             f13 = 0.8F;
-            f5 = entityclientplayermp.getSwingProgress(par1);
-            f6 = MathHelper.sin(f5 * (float)Math.PI);
-            f7 = MathHelper.sin(MathHelper.sqrt_float(f5) * (float)Math.PI);
-            GL11.glTranslatef(-f7 * 0.4F, MathHelper.sin(MathHelper.sqrt_float(f5) * (float)Math.PI * 2.0F) * 0.2F, -f6 * 0.2F);
-            f5 = 1.0F - f2 / 45.0F + 0.1F;
+            swingProgress = entityclientplayermp.getSwingProgress(par1);
+            f6 = MathHelper.sin(swingProgress * (float)Math.PI);
+            f7 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
+            GL11.glTranslatef(-f7 * 0.4F, MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI * 2.0F) * 0.2F, -f6 * 0.2F);
+            swingProgress = 1.0F - f2 / 45.0F + 0.1F;
 
-            if (f5 < 0.0F)
+            if (swingProgress < 0.0F)
             {
-                f5 = 0.0F;
+                swingProgress = 0.0F;
             }
 
-            if (f5 > 1.0F)
+            if (swingProgress > 1.0F)
             {
-                f5 = 1.0F;
+                swingProgress = 1.0F;
             }
 
-            f5 = -MathHelper.cos(f5 * (float)Math.PI) * 0.5F + 0.5F;
-            GL11.glTranslatef(0.0F, 0.0F * f13 - (1.0F - f1) * 1.2F - f5 * 0.5F + 0.04F, -0.9F * f13);
+            swingProgress = -MathHelper.cos(swingProgress * (float)Math.PI) * 0.5F + 0.5F;
+            GL11.glTranslatef(0.0F, 0.0F * f13 - (1.0F - f1) * 1.2F - swingProgress * 0.5F + 0.04F, -0.9F * f13);
             GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(f5 * -85.0F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(swingProgress * -85.0F, 0.0F, 0.0F, 1.0F);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             this.mc.getTextureManager().bindTexture(entityclientplayermp.getLocationSkin());
 			
