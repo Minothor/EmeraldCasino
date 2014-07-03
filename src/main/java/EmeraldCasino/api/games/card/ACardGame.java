@@ -1,16 +1,20 @@
 
 package emeraldCasino.api.games.card;
 
+//java imports
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+//mod imports
 import emeraldCasino.api.games.*;
 import emeraldCasino.api.games.card.*;
 import emeraldCasino.api.games.card.core.*;
 import net.minecraft.client.Minecraft;
+
+//Minecraft imports
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 
@@ -20,7 +24,7 @@ protected MinecraftServer server = MinecraftServer.getServer();
 protected String gameOwner;
  protected List<ICard> tableCards = new LinkedList<ICard>();
  protected Hand dealerHand = new Hand();
- protected List<Player> players = new LinkedList<Player>();
+ protected List<CardPlayer> players = new LinkedList<CardPlayer>();
  protected IDeck deck;
  private int[] buyIn={0,0};
  
@@ -50,7 +54,7 @@ protected String gameOwner;
 	
 	public void addPlayer(String username){
 		EntityPlayer player = server.getConfigurationManager().getPlayerForUsername(username);
-		this.players.add(new Player(player));
+		this.players.add(new CardPlayer(player));
 	}
 	
 	public void removePlayer(String username){
