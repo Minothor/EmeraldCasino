@@ -42,7 +42,7 @@ public class GameMessage implements IMessage {
 	{
 		packetPayload =  ByteBufUtils.readUTF8String(buf);
 		packetData = jsonReader.parse(packetPayload).getAsJsonObject();
-		transferData();
+		//transferData();
 
 	}
 

@@ -39,7 +39,7 @@ public class Poker extends ACardGame {
 	public Poker() {
 		super();
 		gameName="5 ICard Draw";
-		emeraldCasino.CasinoRegistry.getInstance().registerGame(EGameType.CARD,this);
+		emeraldCasino.CasinoRegistry.registerGame(EGameType.CARD,this);
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class Poker extends ACardGame {
 	 */
 	@Override
 	public void DealCards(){
-		for (Player player : players) {
+		for (CardPlayer player : players) {
 			player.addToHand(deck.takeCard());
 		}
 	}

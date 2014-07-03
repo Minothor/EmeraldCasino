@@ -63,7 +63,6 @@ public class itemCardHand extends Item{
 	{
 		System.out.println("RightClicked");
 		if (player.isSneaking()){
-			System.out.println("While Sneaking");
 			EmeraldCasino.ECchannel.sendToServer(new GameMessage("Testing!"));
 		}
 		return itemStack;
