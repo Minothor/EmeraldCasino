@@ -3,11 +3,14 @@ package emeraldCasino;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import emeraldCasino.api.games.EGameType;
 import emeraldCasino.api.games.IGame;
 import emeraldCasino.games.*;
 
-public class CasinoRegistry {
+public class CasinoRegistry { 
 	private static CasinoRegistry instance;
 	private Map<String, List<IGame>> CasinoGames;
 	
@@ -32,6 +35,7 @@ public class CasinoRegistry {
 	
 		return false;
 	}
+
 	
 	
 	
