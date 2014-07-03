@@ -83,7 +83,12 @@ public class GameEntity extends TileEntity{
 
 
 	public void activatedBy(EntityPlayer player) {
-		System.out.println("I'm Different!");		
+		if (player.isClientWorld())
+		{
+			System.out.println("All Alone?");
+		} else {
+			System.out.println("Let's play a game "+player.getDisplayName()+"!");
+		}
 	}
 	
 }

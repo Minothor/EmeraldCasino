@@ -2,9 +2,12 @@ package emeraldCasino.blocks.tileEntities;
 
 import java.util.HashMap;
 import java.util.List;
+import com.google.common.collect.BiMap;
 
-import emeraldCasino.api.games.card.ACardGame;
-import emeraldCasino.api.games.card.ICardGame;
+import emeraldCasino.api.games.core.*;
+import emeraldCasino.api.games.card.*;
+import emeraldCasino.api.games.card.core.*;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -15,9 +18,9 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCardBlock extends GameEntity{
 	
-	private ACardGame game;
+	private ICardGame game;
 	
-	private HashMap<String, Integer[][]> playerHands;
+	private HashMap<String, CardPlayer> players;
 
 
 	public TileEntityCardBlock() {

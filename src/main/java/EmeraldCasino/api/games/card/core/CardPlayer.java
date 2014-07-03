@@ -2,20 +2,21 @@ package emeraldCasino.api.games.card.core;
 
 import java.util.ArrayList;
 
+import emeraldCasino.api.games.core.APlayer;
 import net.minecraft.entity.player.EntityPlayer;
 
 
-public class Player
+public class CardPlayer extends APlayer
 {
 	ArrayList <Hand> hands = new ArrayList <Hand>();
 	EntityPlayer player;
 	
-	public Player(EntityPlayer player)
+	public CardPlayer(EntityPlayer player)
 	{
 		this(new Hand(), player);
 	}
 	
-	public Player (Hand h, EntityPlayer player)
+	public CardPlayer (Hand h, EntityPlayer player)
 	{
 		this.hands.add(h);
 		this.player = player;

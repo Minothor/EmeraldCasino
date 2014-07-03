@@ -1,7 +1,10 @@
 package emeraldCasino.network.packets;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.*;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import javax.vecmath.Point3d;
 
@@ -17,16 +20,20 @@ import emeraldCasino.blocks.tileEntities.GameEntity;
 
 public class GameMessage implements IMessage {
 	protected static JsonParser jsonReader = new JsonParser();
-	World targetWorld;
-	Point3d targetLocation;
-	String packetPayload;
-	JsonObject packetData;
+	World targetWorld = MinecraftServer.getServer().getEntityWorld();
+	protected int targetX,targetY,targetZ;
+	public String packetPayload;
+	protected JsonObject packetData;
 	
 	
 	
+	public GameMessage(String string) {
+		packetPayload=string;
+	}
+
 	private boolean transferData()
 	{
-		GameEntity target = (GameEntity)targetWorld.getTileEntity((int)targetLocation.x, (int)targetLocation.y, (int)targetLocation.z);
+		GameEntity target = (GameEntity)targetWorld.getTileEntity(targetX, targetY, targetZ);
 		return target.processMessage(new GameUpdate(packetPayload));
 	}
 	
@@ -35,7 +42,6 @@ public class GameMessage implements IMessage {
 	{
 		packetPayload =  ByteBufUtils.readUTF8String(buf);
 		packetData = jsonReader.parse(packetPayload).getAsJsonObject();
-		packetData.get("world").getAsString();
 		transferData();
 
 	}

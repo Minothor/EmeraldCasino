@@ -65,6 +65,16 @@ public class blockCardDeck extends BlockContainer{
 	}
 	
 	@Override
+	public boolean isBlockSolid(IBlockAccess block, int x, int y, int z, int metaD) {
+	return false;	
+	}
+	
+	@Override
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+		return false;
+	}
+	
+	@Override
 	public boolean canDropFromExplosion(Explosion p_149659_1_) {
 		return false;
 	}

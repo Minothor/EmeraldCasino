@@ -17,6 +17,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emeraldCasino.blocks.*;
 import emeraldCasino.blocks.tileEntities.*;
@@ -30,6 +31,8 @@ public class EmeraldCasino
     public static final String MODID = "emeraldcasino";
     public static final String NAME = "Emerald Casino";
     public static final String VERSION = "1.7.2 - 1.0.0";
+    
+    public static SimpleNetworkWrapper ECchannel;
     
     @Instance(value = "emeraldcasino")
 	public static EmeraldCasino instance;
@@ -54,6 +57,8 @@ public class EmeraldCasino
 		ECBlocks.register(tabEC);
     	
 		ECItems.register(tabEC);
+		
+		ECNetworking.register(ECchannel);
   	}
   	
   	@EventHandler
