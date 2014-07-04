@@ -25,10 +25,10 @@ public class GameMessage implements IMessage {
 	public String packetPayload;
 	protected JsonObject packetData;
 	
-	
+	public GameMessage() {}
 	
 	public GameMessage(String string) {
-		packetPayload=string;
+		this.packetPayload=string;
 	}
 
 	private boolean transferData()
@@ -41,7 +41,7 @@ public class GameMessage implements IMessage {
 	public void fromBytes(ByteBuf buf)
 	{
 		packetPayload =  ByteBufUtils.readUTF8String(buf);
-		packetData = jsonReader.parse(packetPayload).getAsJsonObject();
+		//packetData = jsonReader.parse(packetPayload).getAsJsonObject();
 		//transferData();
 
 	}
@@ -49,7 +49,7 @@ public class GameMessage implements IMessage {
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		packetPayload = packetData.getAsString();
+		//packetPayload = packetData.getAsString();
 		ByteBufUtils.writeUTF8String(buf, packetPayload);
 
 	}

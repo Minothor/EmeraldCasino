@@ -18,11 +18,6 @@ public class itemCardHand extends Item{
 	}
 	
 	@Override
-	public boolean isMap() {
-		return true;
-	}
-	
-	@Override
 	public boolean doesSneakBypassUse(World world, int x, int y, int z, EntityPlayer player)
 	{
 		return false;

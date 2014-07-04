@@ -25,17 +25,17 @@ public class ItemCardHandRenderer implements IItemRenderer {
 
 	@Override
 	public boolean handleRenderType(ItemStack itemStack, ItemRenderType type) {
-		return (type==ItemRenderType.FIRST_PERSON_MAP);
+		return (type==ItemRenderType.EQUIPPED_FIRST_PERSON);
 	}
 
 	@Override
-	public void renderItem(ItemRenderType renderType, ItemStack item, Object... obj) {
+	public void renderItem(ItemRenderType renderType, ItemStack itemstack, Object... obj) {
 		
 		
 		/*
 		 * Vanilla Map Rendering -- to Modify
-		 * 
-		 * if (itemstack != null && itemstack.getItem() instanceof itemCardHand)
+		 *
+		if (itemstack != null && itemstack.getItem() instanceof itemCardHand)
         {
         	//GET PARENT GAME FROM HAND
         	//GET DECK TEXTURE FROM GAME
@@ -111,21 +111,6 @@ public class ItemCardHandRenderer implements IItemRenderer {
             tessellator.addVertexWithUV((double)(128 + b0), (double)(0 - b0), 0.0D, 1.0D, 0.0D);
             tessellator.addVertexWithUV((double)(0 - b0), (double)(0 - b0), 0.0D, 0.0D, 0.0D);
             tessellator.draw();
-
-            IItemRenderer custom = MinecraftForgeClient.getItemRenderer(itemstack, FIRST_PERSON_MAP);
-            MapData mapdata = ((ItemMap)itemstack.getItem()).getMapData(itemstack, this.mc.theWorld);
-
-            if (custom == null)
-            {
-                if (mapdata != null)
-                {
-                    this.mc.entityRenderer.getMapItemRenderer().func_148250_a(mapdata, false);
-                }
-            }
-            else
-            {
-                custom.renderItem(FIRST_PERSON_MAP, itemstack, mc.thePlayer, mc.getTextureManager(), mapdata);
-            }
 
             GL11.glPopMatrix();
         }

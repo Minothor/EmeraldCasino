@@ -17,6 +17,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emeraldCasino.blocks.*;
@@ -48,6 +49,9 @@ public class EmeraldCasino
   	@EventHandler
   	public void preInit(FMLPreInitializationEvent event)
   	{
+  	//Register Channel
+  		ECchannel = NetworkRegistry.INSTANCE.newSimpleChannel(EmeraldCasino.MODID);
+  		
   		tabEC = new CreativeTabs("tabEC"){
 			public Item getTabIconItem() {
 				return Item.getItemFromBlock(Blocks.emerald_block);
