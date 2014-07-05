@@ -6,9 +6,14 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import emeraldCasino.items.itemCardHand;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
@@ -31,10 +36,10 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType renderType, ItemStack itemstack, Object... obj) {
 		
-		
 		/*
 		 * Vanilla Map Rendering -- to Modify
-		 *
+		 */
+		EntityClientPlayerMP entityclientplayermp = Minecraft.getMinecraft().thePlayer;
 		if (itemstack != null && itemstack.getItem() instanceof itemCardHand)
         {
         	//GET PARENT GAME FROM HAND
