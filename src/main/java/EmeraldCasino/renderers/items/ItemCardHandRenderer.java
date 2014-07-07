@@ -49,7 +49,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
         	
             GL11.glPushMatrix();
             f13 = 0.8F;
-            swingProgress = entityclientplayermp.getSwingProgress(par1);
+            swingProgress = entityclientplayermp.getSwingProgress(RenderManager.instance.);
             f6 = MathHelper.sin(swingProgress * (float)Math.PI);
             f7 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
             GL11.glTranslatef(-f7 * 0.4F, MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI * 2.0F) * 0.2F, -f6 * 0.2F);
