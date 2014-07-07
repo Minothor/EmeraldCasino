@@ -23,18 +23,22 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ItemCardHandRenderer implements IItemRenderer {
+	int itemRenderId;
 	
 	public ItemCardHandRenderer() {
-		//itemRenderId = RenderingRegistry.getNextAvailableRenderId();
+		itemRenderId = RenderingRegistry.getNextAvailableRenderId();
 	}
 
 	@Override
 	public boolean handleRenderType(ItemStack itemStack, ItemRenderType type) {
 		return (type==ItemRenderType.EQUIPPED_FIRST_PERSON);
 	}
-
+	
+	
 	@Override
 	public void renderItem(ItemRenderType renderType, ItemStack itemstack, Object... obj) {
+		
+		
 		
 		/*
 		 * Vanilla Map Rendering -- to Modify
