@@ -2,12 +2,16 @@ package emeraldCasino;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emeraldCasino.items.*;
+import emeraldCasino.renderers.items.ItemCardHandRenderer;
 
 public class ECItems {
 	public static Item itemCardDeck;
 	public static Item itemCardHand;
+	
+	public static ItemCardHandRenderer cardHandRenderer;
 	
 	private ECItems() {}
 	
@@ -22,5 +26,9 @@ public class ECItems {
   		
   		GameRegistry.registerItem(itemCardDeck, "cardDeck");
   		GameRegistry.registerItem(itemCardHand, "cardHand");
+  		
+  		cardHandRenderer = new ItemCardHandRenderer();
+  		
+  		MinecraftForgeClient.registerItemRenderer(itemCardHand, cardHandRenderer);
 	}
 }

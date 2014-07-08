@@ -6,22 +6,28 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import emeraldCasino.items.itemCardHand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.MapData;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 
+@SideOnly(Side.CLIENT)
 public class ItemCardHandRenderer implements IItemRenderer {
 	int itemRenderId;
 	
@@ -35,27 +41,30 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	}
 	
 	
-	@Override
-	public void renderItem(ItemRenderType renderType, ItemStack itemstack, Object... obj) {
+	public void renderItemInFirstPerson(float par1)
+	{
 		
 		
 		
 		/*
 		 * Vanilla Map Rendering -- to Modify
 		 */
-		EntityClientPlayerMP entityclientplayermp = Minecraft.getMinecraft().thePlayer;
-		if (itemstack != null && itemstack.getItem() instanceof itemCardHand)
-        {
+		float f1 = 1.0F;
+		Minecraft minecraft = Minecraft.getMinecraft();
+		EntityClientPlayerMP entityclientplayermp = minecraft.thePlayer;
+		ResourceLocation deckTexture = new ResourceLocation(emeraldCasino.EmeraldCasino.MODID,"textures/cardDecks/deck_standard.png");
+		float f2 = entityclientplayermp.prevRotationPitch + (entityclientplayermp.rotationPitch - entityclientplayermp.prevRotationPitch) * par1;
+        
         	//GET PARENT GAME FROM HAND
         	//GET DECK TEXTURE FROM GAME
         	//BIND DECK TEXTURE FROM GAME
         	//GET CARDS & CARD DATA FROM HAND
         	
             GL11.glPushMatrix();
-            f13 = 0.8F;
-            swingProgress = entityclientplayermp.getSwingProgress(RenderManager.instance.);
-            f6 = MathHelper.sin(swingProgress * (float)Math.PI);
-            f7 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
+            float f13 = 0.8F;
+            float swingProgress = entityclientplayermp.getSwingProgress(par1);
+            float f6 = MathHelper.sin(swingProgress * (float)Math.PI);
+            float f7 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
             GL11.glTranslatef(-f7 * 0.4F, MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI * 2.0F) * 0.2F, -f6 * 0.2F);
             swingProgress = 1.0F - f2 / 45.0F + 0.1F;
 
@@ -74,7 +83,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
             GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(swingProgress * -85.0F, 0.0F, 0.0F, 1.0F);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            this.mc.getTextureManager().bindTexture(entityclientplayermp.getLocationSkin());
+            minecraft.getTextureManager().bindTexture(entityclientplayermp.getLocationSkin());
 			
 			
 			//RENDER CARD RECTS IN ARC -- INCREASE DISTANCE FROM ORIGIN FOR ACTIVE CARDS
@@ -89,28 +98,28 @@ public class ItemCardHandRenderer implements IItemRenderer {
                 GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
                 GL11.glRotatef(59.0F, 0.0F, 0.0F, 1.0F);
                 GL11.glRotatef((float)(-65 * j1), 0.0F, 1.0F, 0.0F);
-                render = RenderManager.instance.getEntityRenderObject(this.mc.thePlayer);
-                renderplayer = (RenderPlayer)render;
-                f10 = 1.0F;
+                Render render = RenderManager.instance.getEntityRenderObject(entityclientplayermp);
+                RenderPlayer renderplayer = (RenderPlayer)render;
+                float f10 = 1.0F;
                 GL11.glScalef(f10, f10, f10);
-                renderplayer.renderFirstPersonArm(this.mc.thePlayer);
+                renderplayer.renderFirstPersonArm(entityclientplayermp);
                 GL11.glPopMatrix();
             }
 
             f6 = entityclientplayermp.getSwingProgress(par1);
             f7 = MathHelper.sin(f6 * f6 * (float)Math.PI);
-            f8 = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI);
+            float f8 = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI);
             GL11.glRotatef(-f7 * 20.0F, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(-f8 * 20.0F, 0.0F, 0.0F, 1.0F);
             GL11.glRotatef(-f8 * 80.0F, 1.0F, 0.0F, 0.0F);
-            f9 = 0.38F;
+            float f9 = 0.38F;
             GL11.glScalef(f9, f9, f9);
             GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
             GL11.glTranslatef(-1.0F, -1.0F, 0.0F);
-            f10 = 0.015625F;
+            float f10 = 0.015625F;
             GL11.glScalef(f10, f10, f10);
-            this.mc.getTextureManager().bindTexture(deckTexture);
+            minecraft.getTextureManager().bindTexture(deckTexture);
             Tessellator tessellator = Tessellator.instance;
             GL11.glNormal3f(0.0F, 0.0F, -1.0F);
             tessellator.startDrawingQuads();
@@ -122,8 +131,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
             tessellator.draw();
 
             GL11.glPopMatrix();
-        }
-		 */
+       
 	}
 	
 	@Override
@@ -131,6 +139,12 @@ public class ItemCardHandRenderer implements IItemRenderer {
 			ItemRendererHelper arg2) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
