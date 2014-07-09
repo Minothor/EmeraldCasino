@@ -41,15 +41,16 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	}
 	
 	
-	public void renderItemInFirstPerson(float par1)
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) 
 	{
-		
 		
 		
 		/*
 		 * Vanilla Map Rendering -- to Modify
 		 */
 		float f1 = 1.0F;
+		float par1 = 0.5F;//temp testing
 		Minecraft minecraft = Minecraft.getMinecraft();
 		EntityClientPlayerMP entityclientplayermp = minecraft.thePlayer;
 		ResourceLocation deckTexture = new ResourceLocation(emeraldCasino.EmeraldCasino.MODID,"textures/cardDecks/deck_standard.png");
@@ -141,10 +142,6 @@ public class ItemCardHandRenderer implements IItemRenderer {
 		return false;
 	}
 
-	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }
