@@ -1,6 +1,6 @@
 package emeraldCasino.renderers.items;
 
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.FIRST_PERSON_MAP;
+import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -37,7 +37,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
 
 	@Override
 	public boolean handleRenderType(ItemStack itemStack, ItemRenderType type) {
-		return (type==ItemRenderType.EQUIPPED_FIRST_PERSON);
+		return (type==EQUIPPED_FIRST_PERSON);
 	}
 	
 	
@@ -138,8 +138,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType arg0, ItemStack arg1,
 			ItemRendererHelper arg2) {
-		// TODO Auto-generated method stub
-		return false;
+		return arg0==EQUIPPED_FIRST_PERSON;
 	}
 
 
