@@ -11,8 +11,6 @@ public class ECItems {
 	public static Item itemCardDeck;
 	public static Item itemCardHand;
 	
-	public static ItemCardHandRenderer cardHandRenderer;
-	
 	private ECItems() {}
 	
 	public static void register(CreativeTabs tabEC)
@@ -26,9 +24,5 @@ public class ECItems {
   		
   		GameRegistry.registerItem(itemCardDeck, "cardDeck");
   		GameRegistry.registerItem(itemCardHand, "cardHand");
-  		
-  		cardHandRenderer = new ItemCardHandRenderer();
-  		
-  		MinecraftForgeClient.registerItemRenderer(itemCardHand, cardHandRenderer);
 	}
 }

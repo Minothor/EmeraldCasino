@@ -24,8 +24,14 @@ public class itemCardHand extends Item{
 	}
 	
 	@Override
-	public Item setNoRepair() {
-		// TODO Auto-generated method stub
+	public boolean isFull3D()
+	{
+		return true;
+	};
+	
+	@Override
+	public Item setNoRepair()
+	{
 		return super.setNoRepair();
 	}
 	
