@@ -53,9 +53,14 @@ public class ItemCardHandRenderer implements IItemRenderer {
 		
 		Render render = RenderManager.instance.getEntityRenderObject(entityclientplayer);
 		RenderPlayer renderplayer = (RenderPlayer)render;
+		//GL11.glTranslatef(0F, 0F, 0F);
+		//GL11.glRotatef(30.0F, 0.0F, 0.0F, 1.0F);
+		//GL11.glRotatef(-20.0F, 0.0F, 1F, 0.0F);
+		//GL11.glRotatef(-25.0F, 1F, 0.0F, 0.0F);
+		//GL11.glTranslatef(-0.2F, -0.1F, -0.2F);
 		renderplayer.renderFirstPersonArm(entityclientplayer);
-		GL11.glTranslatef(-50.0F, -50.0F, -50.0F);
-		GL11.glRotatef(90.0F, 1.0F, 1.0F, 0.0F);
+//		GL11.glTranslatef(0.0F, -0.5F, 0.0F);
+//		GL11.glRotatef(90.0F, 1.0F, 1.0F, 0.0F);
 		GL11.glPopMatrix();
 		
 //		/*
