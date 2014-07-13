@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import emeraldCasino.EmeraldCasino;
 import emeraldCasino.api.games.EGameType;
 import emeraldCasino.api.games.card.*;
 import emeraldCasino.api.games.card.core.*;
@@ -38,8 +39,18 @@ public class Poker extends ACardGame {
 	 */
 	public Poker() {
 		super();
-		gameName="5 ICard Draw";
-		emeraldCasino.CasinoRegistry.registerGame(EGameType.CARD,this);
+		gameName="5 Card Draw";
+		emeraldCasino.CasinoRegistry.registerGame(this);
+	}
+	
+	/**
+	 * Overridden getID() Function
+	 * Prefaces the game ID with the ModID for extra clarity
+	 */
+	@Override
+	public String getID()
+	{
+		return EmeraldCasino.MODID+"."+super.getID();
 	}
 	
 	/**

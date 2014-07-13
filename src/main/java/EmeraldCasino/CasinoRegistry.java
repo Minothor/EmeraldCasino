@@ -1,7 +1,10 @@
 package emeraldCasino;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.minecraft.world.WorldSettings.GameType;
 
 import com.google.common.collect.BiMap;
 import com.google.gson.JsonObject;
@@ -13,10 +16,12 @@ import emeraldCasino.games.*;
 
 public class CasinoRegistry { 
 	private static CasinoRegistry instance;
-	private BiMap<String, IGame> CasinoGames;
+//	private BiMap<String, IGame> CasinoGames;
+	private Map<EGameType, Map<String,IGame>> CasinoGames;
 	
-	private CasinoRegistry(){
-		
+	private CasinoRegistry()
+	{
+		CasinoGames=new HashMap<EGameType, Map<String,IGame>>();
 	}
 	
 	private static synchronized CasinoRegistry getInstance(){
@@ -25,16 +30,19 @@ public class CasinoRegistry {
 		return instance;
 	}
 	
-	public static boolean registerGame(EGameType type, IGame game)
+	public static boolean registerGame(IGame game)
 	{
-		getInstance();
-		return false;
+		EGameType type = game.getType();
+		String ID = game.getID();
+		HashMap<String, IGame> gameEntry = new HashMap<String, IGame>();
+		gameEntry.put(ID, game);
+		boolean result =((getInstance().CasinoGames.put(type, gameEntry))!=null);
+		return result;
 	}
 	
-	public static boolean getGame(IGame game)
+	public static IGame getGame(EGameType gameType, String gameNBTcondensed)
 	{
-		getInstance();
-		return false;
+		return getInstance().CasinoGames.get(gameType).get(gameNBTcondensed);
 	}
 
 	

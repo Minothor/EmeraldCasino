@@ -8,10 +8,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+
 //mod imports
 import emeraldCasino.api.games.*;
 import emeraldCasino.api.games.card.*;
 import emeraldCasino.api.games.card.core.*;
+import emeraldCasino.api.games.core.IPlayer;
 import net.minecraft.client.Minecraft;
 
 //Minecraft imports
@@ -34,6 +36,7 @@ protected String gameOwner;
 	 */
 	public ACardGame() {
 		super();
+		this.type=EGameType.CARD;
 	}
 	
 	public void DealCards(){
@@ -52,9 +55,10 @@ protected String gameOwner;
 		return toSort;
 	}
 	
-	public void addPlayer(String username){
+	public IPlayer addPlayer(String username){
 		EntityPlayer player = server.getConfigurationManager().getPlayerForUsername(username);
-		this.players.add(new CardPlayer(player));
+		return(new CardPlayer(player));
+		
 	}
 	
 	public void removePlayer(String username){
