@@ -8,7 +8,12 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import emeraldCasino.api.games.card.ICardGame;
+import emeraldCasino.api.games.card.core.*;
 import emeraldCasino.items.itemCardHand;
+import emeraldCasino.CasinoRegistry;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -22,6 +27,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.MapData;
@@ -31,9 +37,23 @@ import net.minecraftforge.client.MinecraftForgeClient;
 @SideOnly(Side.CLIENT)
 public class ItemCardHandRenderer implements IItemRenderer {
 	int itemRenderId;
+	Tessellator tessellator;
+	Minecraft minecraft;
+	ICardGame gameMethods;
+	TileEntity parentBlock;
+	RenderManager renderManager;
+	Render render;
+	ResourceLocation deckTexture;
+	EntityClientPlayerMP entityclientplayer;
+	int totalCards;
 	
 	public ItemCardHandRenderer() {
 		itemRenderId = RenderingRegistry.getNextAvailableRenderId();
+		tessellator = Tessellator.instance;
+		minecraft = Minecraft.getMinecraft();
+		renderManager = RenderManager.instance;
+		deckTexture = new ResourceLocation(emeraldCasino.EmeraldCasino.MODID,"textures/cardDecks/deck_standard.png");
+		entityclientplayer = minecraft.thePlayer;
 	}
 
 	@Override
@@ -47,26 +67,82 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	{	
 		//renderArm('R');
 		
-		renderCards(item);
-		
-		vanillaMap();
+		renderCardHand(item);
 
        
 	}
 
-	private void renderCards(ItemStack item) {
-		String targetX = item.readFromNBT(par1NBTTagCompound);  
+	private void renderCardHand(ItemStack item) {
+		//String targetX = item.readFromNBT(par1NBTTagCompound);
+		int house = 1;
+		int value = 1;
+		totalCards=7;
 		
+		GL11.glPushMatrix();
+		GL11.glRotatef((float)(totalCards/Math.PI)*15F, 0F, 1F, 0F);
+		float xPos = 0F;//renderManager.playerViewX;
+		float yPos = 0F;//renderManager.playerViewY;
+		for(int cardIndex=1;cardIndex<=totalCards;cardIndex++)
+		{
+		if(house>4)
+			house=1;
+		if(value>13)
+			value=13;
+		renderCard(house,value,xPos,yPos,cardIndex);
+		xPos+=0.5F;
+		house++;
+		value++;
+		}
+		
+		GL11.glTranslatef(0F, -2F, 0F);
+		GL11.glPopMatrix();
+	}
+
+	private void renderCard(int house, int value, float xPos, float yPos, int cardIndex) {
+		float zPos = (0F-totalCards)+(0.1F*cardIndex); 
+		float xUnit = 1.0F/256, yUnit = 1.0F/256;
+		float xCorrection = 0F;
+		if (value>1)
+			xCorrection=(value-1)*xUnit;
+		float startX = (((value-1)*18)*xUnit)+xCorrection;
+		float endX = ((value*18)*xUnit)+xCorrection;
+		
+			
+		
+		float startY = ((house-1)*32)*yUnit;
+		float endY = (house*32)*yUnit;
+		
+		/*System.out.println("House: "+house
+				+"\nValue: "+value
+				+"\n---"
+				+"\nstartX: "+startX
+				+"\nendX: "+endX
+				+"\nstartY: "+startY
+				+"\nendY: "+endY
+				+"\n==============");
+		*/
+		GL11.glPushMatrix();
+		GL11.glRotatef(cardIndex*-15F, 0F, 1F, 0F);
+		minecraft.getTextureManager().bindTexture(deckTexture);
+		tessellator.startDrawingQuads();
+		float scale=0.1F;//for testing but proved useful for tweaking
+		//draw card vertices here
+		tessellator.addVertexWithUV(scale*(xPos+18), scale*yPos, zPos, endX+xUnit, endY); //lower right
+		tessellator.addVertexWithUV(scale*(xPos+18), scale*(yPos+32), zPos, endX+xUnit, startY); //upper right
+		tessellator.addVertexWithUV(scale*xPos, scale*(yPos+32), zPos, startX, startY);//upper left
+		tessellator.addVertexWithUV(scale*xPos, scale*yPos, zPos, startX, endY);//lower left
+		tessellator.draw();
+		
+		GL11.glScalef(0.5F, 0.5F, 0.5F);
+		GL11.glPopMatrix();
 	}
 
 	private void renderArm(char arm) {
-		Minecraft minecraft = Minecraft.getMinecraft();
-		EntityClientPlayerMP entityclientplayer = minecraft.thePlayer;
 		minecraft.getTextureManager().bindTexture(entityclientplayer.getLocationSkin());
 		
 		GL11.glPushMatrix();
 		
-		Render render = RenderManager.instance.getEntityRenderObject(entityclientplayer);
+		render = renderManager.getEntityRenderObject(entityclientplayer);
 		RenderPlayer renderplayer = (RenderPlayer)render;
 		if(arm=='R')
 		{
@@ -84,98 +160,6 @@ public class ItemCardHandRenderer implements IItemRenderer {
 			
 		}
 		GL11.glPopMatrix();
-	}
-	
-	private void vanillaMap() {
-//		/*
-//		 * Vanilla Map Rendering -- to Modify
-//		 */
-//		float f1 = 1.0F;
-//		float par1 = 0.0F;//temp testing
-//		Minecraft minecraft = Minecraft.getMinecraft();
-//		EntityClientPlayerMP entityclientplayermp = minecraft.thePlayer;
-//		ResourceLocation deckTexture = new ResourceLocation(emeraldCasino.EmeraldCasino.MODID,"textures/cardDecks/deck_standard.png");
-//		float f2 = 0.5F; 
-//				//entityclientplayermp.prevRotationPitch + (entityclientplayermp.rotationPitch - entityclientplayermp.prevRotationPitch) * par1;
-//       
-//       	//GET PARENT GAME FROM HAND
-//       	//GET DECK TEXTURE FROM GAME
-//       	//BIND DECK TEXTURE FROM GAME
-//       	//GET CARDS & CARD DATA FROM HAND
-//       	
-//           GL11.glPushMatrix();
-//           float f13 = 0.8F;
-//           float swingProgress = entityclientplayermp.getSwingProgress(par1);
-//           float f6 = MathHelper.sin(swingProgress * (float)Math.PI);
-//           float f7 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
-//           GL11.glTranslatef(-f7 * 0.4F, MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI * 2.0F) * 0.2F, -f6 * 0.2F);
-//           swingProgress = 1.0F - f2 / 45.0F + 0.1F;
-//
-//           if (swingProgress < 0.0F)
-//           {
-//               swingProgress = 0.0F;
-//           }
-//
-//           if (swingProgress > 1.0F)
-//           {
-//               swingProgress = 1.0F;
-//           }
-//           
-//           
-//           swingProgress = -MathHelper.cos(swingProgress * (float)Math.PI) * 0.5F + 0.5F;
-//           GL11.glTranslatef(0.0F, 0.0F * f13 - (1.0F - f1) * 1.2F - swingProgress * 0.5F + 0.04F, -0.9F * f13);
-//           GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-//           GL11.glRotatef(swingProgress * -85.0F, 0.0F, 0.0F, 1.0F);
-//           GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-//           minecraft.getTextureManager().bindTexture(entityclientplayermp.getLocationSkin());
-//			
-//			
-//			//RENDER CARD RECTS IN ARC -- INCREASE DISTANCE FROM ORIGIN FOR ACTIVE CARDS
-//			
-//			
-//           for (int i1 = 0; i1 < 2; ++i1)
-//           {
-//               int j1 = i1 * 2 - 1;
-//               GL11.glPushMatrix();
-//               GL11.glTranslatef(-0.0F, -0.6F, 1.1F * (float)j1);
-//               GL11.glRotatef((float)(-45 * j1), 1.0F, 0.0F, 0.0F);
-//               GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
-//               GL11.glRotatef(59.0F, 0.0F, 0.0F, 1.0F);
-//               GL11.glRotatef((float)(-65 * j1), 0.0F, 1.0F, 0.0F);
-//               Render render = RenderManager.instance.getEntityRenderObject(entityclientplayermp);
-//               RenderPlayer renderplayer = (RenderPlayer)render;
-//               float f10 = 1.0F;
-//               GL11.glScalef(f10, f10, f10);
-//               renderplayer.renderFirstPersonArm(entityclientplayermp);
-//               GL11.glPopMatrix();
-//           }
-//
-//           f6 = entityclientplayermp.getSwingProgress(par1);
-//           f7 = MathHelper.sin(f6 * f6 * (float)Math.PI);
-//           float f8 = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI);
-//           GL11.glRotatef(-f7 * 20.0F, 0.0F, 1.0F, 0.0F);
-//           GL11.glRotatef(-f8 * 20.0F, 0.0F, 0.0F, 1.0F);
-//           GL11.glRotatef(-f8 * 80.0F, 1.0F, 0.0F, 0.0F);
-//           float f9 = 0.38F;
-//           GL11.glScalef(f9, f9, f9);
-//           GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-//           GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-//           GL11.glTranslatef(-1.0F, -1.0F, 0.0F);
-//           float f10 = 0.015625F;
-//           GL11.glScalef(f10, f10, f10);
-//           minecraft.getTextureManager().bindTexture(deckTexture);
-//           Tessellator tessellator = Tessellator.instance;
-//           GL11.glNormal3f(0.0F, 0.0F, -1.0F);
-//           tessellator.startDrawingQuads();
-//           byte b0 = 7;
-//           tessellator.addVertexWithUV((double)(0 - b0), (double)(128 + b0), 0.0D, 0.0D, 1.0D);
-//           tessellator.addVertexWithUV((double)(128 + b0), (double)(128 + b0), 0.0D, 1.0D, 1.0D);
-//           tessellator.addVertexWithUV((double)(128 + b0), (double)(0 - b0), 0.0D, 1.0D, 0.0D);
-//           tessellator.addVertexWithUV((double)(0 - b0), (double)(0 - b0), 0.0D, 0.0D, 0.0D);
-//           tessellator.draw();
-//
-//           GL11.glPopMatrix();
-		
 	}
 
 	
