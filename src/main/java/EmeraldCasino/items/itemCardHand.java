@@ -48,7 +48,11 @@ public class itemCardHand extends Item{
 		Block hit = player.getEntityWorld().getBlock(X, Y, Z);
 		if (hit instanceof emeraldCasino.blocks.blockCardDeck)
 		{
-			EmeraldCasino.ECchannel.sendToServer(new GameMessage("Testing!"));
+			if (player.isSneaking()){
+				
+			}else{
+			EmeraldCasino.ECchannel.sendToServer(new GameMessage("PLAY"));
+			}
 		}
 		return false;
 	}
@@ -60,11 +64,24 @@ public class itemCardHand extends Item{
 	}
 	
 	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+	{
+		if (entityLiving instanceof EntityPlayer)
+		{
+			if (entityLiving.isSneaking()){
+				EmeraldCasino.ECchannel.sendToServer(new GameMessage("SELECT"));
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		System.out.println("RightClicked");
 		if (player.isSneaking()){
-			EmeraldCasino.ECchannel.sendToServer(new GameMessage("Testing!"));
+			EmeraldCasino.ECchannel.sendToServer(new GameMessage("HOVER_NEXT"));
 		}
 		return itemStack;
 	}
