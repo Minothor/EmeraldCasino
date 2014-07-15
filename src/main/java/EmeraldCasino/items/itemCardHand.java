@@ -39,7 +39,7 @@ public class itemCardHand extends Item{
 	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player)
 	{
 		item=null;
-		return super.onDroppedByPlayer(item, player);
+		return false;
 	}
 	
 	@Override

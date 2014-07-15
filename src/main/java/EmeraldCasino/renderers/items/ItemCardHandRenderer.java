@@ -44,6 +44,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	RenderManager renderManager;
 	Render render;
 	ResourceLocation deckTexture;
+	ResourceLocation playerTexture;
 	EntityClientPlayerMP entityclientplayer;
 	int totalCards;
 	
@@ -54,6 +55,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
 		renderManager = RenderManager.instance;
 		deckTexture = new ResourceLocation(emeraldCasino.EmeraldCasino.MODID,"textures/cardDecks/deck_standard.png");
 		entityclientplayer = minecraft.thePlayer;
+		//entityclientplayer.getLocationSkin();
 	}
 
 	@Override
@@ -79,27 +81,27 @@ public class ItemCardHandRenderer implements IItemRenderer {
 		totalCards=7;
 		
 		GL11.glPushMatrix();
-		GL11.glRotatef((float)(totalCards/Math.PI)*15F, 0F, 1F, 0F);
-		float xPos = 0F;//renderManager.playerViewX;
-		float yPos = 0F;//renderManager.playerViewY;
+		GL11.glRotatef((67.5F), 0F, 1F, 0F);
+		GL11.glTranslatef(7F/totalCards, -1.6F, 0F);
 		for(int cardIndex=1;cardIndex<=totalCards;cardIndex++)
 		{
 		if(house>4)
 			house=1;
 		if(value>13)
 			value=13;
-		renderCard(house,value,xPos,yPos,cardIndex);
-		xPos+=0.5F;
+		renderCard(house,value,cardIndex);
 		house++;
 		value++;
 		}
 		
-		GL11.glTranslatef(0F, -2F, 0F);
 		GL11.glPopMatrix();
 	}
 
-	private void renderCard(int house, int value, float xPos, float yPos, int cardIndex) {
-		float zPos = (0F-totalCards)+(0.1F*cardIndex); 
+	private void renderCard(int house, int value, int cardIndex) {
+		float xPos = 0F;
+		float yPos = 0F ;
+		float zPos = (0.1F*cardIndex)-totalCards;
+		
 		float xUnit = 1.0F/256, yUnit = 1.0F/256;
 		float xCorrection = 0F;
 		if (value>1)
@@ -122,7 +124,10 @@ public class ItemCardHandRenderer implements IItemRenderer {
 				+"\n==============");
 		*/
 		GL11.glPushMatrix();
-		GL11.glRotatef(cardIndex*-15F, 0F, 1F, 0F);
+		float cardPercentage = cardIndex/(float)totalCards;
+		GL11.glRotatef((-0.5F-cardPercentage)*90F, -(0.1F*cardPercentage), 1F, 0F);
+		//GL11.glRotatef((cardPercentage*90F), 0F, -1F, 0F);
+		
 		minecraft.getTextureManager().bindTexture(deckTexture);
 		tessellator.startDrawingQuads();
 		float scale=0.1F;//for testing but proved useful for tweaking
@@ -138,7 +143,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	}
 
 	private void renderArm(char arm) {
-		minecraft.getTextureManager().bindTexture(entityclientplayer.getLocationSkin());
+		minecraft.getTextureManager().bindTexture(playerTexture);
 		
 		GL11.glPushMatrix();
 		
