@@ -12,9 +12,9 @@ import net.minecraft.server.MinecraftServer;
 
 public interface ICardGame extends IGame {
 		
-		public void DealCards();
+		public void DealCards(IDeck deck, List<CardPlayer> players);
 		
-		void EvalGame();
+		void EvalGame(List<CardPlayer> players);
 		
 		EntityPlayer getPlayer(String username);
 

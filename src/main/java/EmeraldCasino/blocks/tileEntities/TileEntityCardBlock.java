@@ -52,6 +52,7 @@ public class TileEntityCardBlock extends GameEntity{
 		condensePlayers();
 	    super.writeToNBT(nbt);
 	    nbt.setString("playerList", playersNBTcondensed);
+	    nbt.setString("gameID", emeraldCasino.CasinoRegistry.getGameID(this.game));
 	}
 
 	private void condensePlayers()

@@ -23,16 +23,16 @@ import net.minecraft.init.Items;
 public class Poker extends ACardGame {
 	
 	/** Booleans for flush and straight. Initialised to false. */
-	protected boolean flush = false, straight = false;
+	protected static boolean flush = false, straight = false;
 	
 	/** List of Integers for 4 of a Kind card values. */
-	protected LinkedList<Integer> oK4 =new LinkedList<Integer>();
+	protected static LinkedList<Integer> oK4 =new LinkedList<Integer>();
 	
 	/** List of Integers for 3 of a Kind card values. */
-	protected LinkedList<Integer> oK3 =new LinkedList<Integer>();
+	protected static LinkedList<Integer> oK3 =new LinkedList<Integer>();
 	
 	/** List of Integers for 4 of a Kind card values. */
-	protected LinkedList<Integer> oK2 =new LinkedList<Integer>();
+	protected static LinkedList<Integer> oK2 =new LinkedList<Integer>();
 	
 	/**
 	 * Instantiates a new poker game class.
@@ -54,10 +54,10 @@ public class Poker extends ACardGame {
 	}
 	
 	/**
-	 * Deals 1 ICard to each Player from the in game Deck.
+	 * Deals 1 Card to each Player from the game's Deck.
 	 */
 	@Override
-	public void DealCards(){
+	public void DealCards(IDeck deck, List<CardPlayer> players){
 		for (CardPlayer player : players) {
 			player.addToHand(deck.takeCard());
 		}
@@ -70,7 +70,7 @@ public class Poker extends ACardGame {
 	 *
 	 * @param toEval The List of cards to parse.
 	 */
-	protected void checkMultis(List<ICard> toEval){
+	protected List[] checkMultis(List<ICard> toEval){
 		oK2.clear();
 		int cardValue;
 		Map<Integer,Integer> cardVals= new HashMap<Integer,Integer>();
@@ -269,7 +269,7 @@ public class Poker extends ACardGame {
 	}
 
 	@Override
-	public void EvalGame() {
+	public void EvalGame(List<CardPlayer> players) {
 		// TODO Auto-generated method stub
 		
 	}

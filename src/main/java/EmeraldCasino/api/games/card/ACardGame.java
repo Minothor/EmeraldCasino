@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 
+
 //mod imports
 import emeraldCasino.api.games.*;
 import emeraldCasino.api.games.card.*;
@@ -39,7 +40,7 @@ protected String gameOwner;
 		this.type=EGameType.CARD;
 	}
 	
-	public void DealCards(){
+	public void DealCards(IDeck deck, List<CardPlayer> players){
 		
 	}
 	
