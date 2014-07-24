@@ -14,11 +14,9 @@ public interface ICardGame extends IGame {
 		
 		public void DealCards(IDeck deck, List<CardPlayer> players);
 		
-		void EvalGame(List<CardPlayer> players);
+		CardPlayer EvalGame(List<CardPlayer> players);
 		
 		EntityPlayer getPlayer(String username);
-
-		void setOwner(EntityPlayer owner);
 		
 		public String toString(ArrayList<ICard> cards);
 		

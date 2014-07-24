@@ -1,6 +1,7 @@
 package emeraldCasino.api.games.card.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import emeraldCasino.api.games.core.APlayer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -51,14 +52,14 @@ public class CardPlayer extends APlayer
 		}
 	}
 	
-	public Hand getHand()
+	public List<ICard> getHand()
 	{
 		return getHand(0);
 	}
 	
-	public Hand getHand(int index)
+	public List<ICard> getHand(int index)
 	{
-		return this.hands.get(index);
+		return this.hands.get(index).getCards();
 	}
 	
 	public EntityPlayer getPlayer()

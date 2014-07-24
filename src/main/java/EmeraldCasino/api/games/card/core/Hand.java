@@ -12,6 +12,12 @@ public class Hand {
 	
 	public Hand() {
 	}
+	
+	public List<ICard> getCards()
+	{
+		return this.cards;
+	}
+	
 	public void addCard(ICard card){
 		cards.add(card);
 	}

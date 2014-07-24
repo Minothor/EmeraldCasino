@@ -12,7 +12,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class GameEntity extends TileEntity{
-	protected int gameID;
+	protected String gameID;
 	protected String ownerDisplayName;
 	protected List<String> players;
 	protected HashMap<String, Integer> playerBalances;
@@ -30,7 +30,7 @@ public class GameEntity extends TileEntity{
 	public void writeToNBT(NBTTagCompound nbtTag)
 	{
 		super.writeToNBT(nbtTag);
-		nbtTag.setInteger("gameID", this.gameID);
+		nbtTag.setString("gameID", this.gameID);
 		nbtTag.setString("playerList", condensePlayers());
 	}
 	
@@ -48,14 +48,22 @@ public class GameEntity extends TileEntity{
 
 	public boolean processMessage(GameUpdate data)
 	{
+		
 		return true;
 	}
 
 	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	};
+	
+	
+	@Override
 	public void readFromNBT(NBTTagCompound nbtTag)
 	{
 		super.readFromNBT(nbtTag);
-		this.gameID = nbtTag.getInteger("gameID");
+		this.gameID = nbtTag.getString("gameID");
 	}
 	
 	private String condensePlayers() {

@@ -36,12 +36,12 @@ public class TileEntityCardBlock extends GameEntity{
 	    super.readFromNBT(nbt);
 	    this.playersNBTcondensed = nbt.getString("playerList");
 	    this.gameNBTcondensed = nbt.getString("gameID");
-	    resolveGameType();
+	    resolveGame();
 	    expandPlayers();
 	    
 	}
 	
-	private void resolveGameType() {
+	private void resolveGame() {
 		this.game=(ICardGame) emeraldCasino.CasinoRegistry.getGame(EGameType.CARD,gameNBTcondensed);
 		
 	}
