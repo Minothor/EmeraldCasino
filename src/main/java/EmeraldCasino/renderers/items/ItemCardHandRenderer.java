@@ -2,18 +2,19 @@ package emeraldCasino.renderers.items;
 
 import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import emeraldCasino.api.games.card.ICardGame;
 import emeraldCasino.api.games.card.core.*;
 import emeraldCasino.items.itemCardHand;
 import emeraldCasino.CasinoRegistry;
-
+import emeraldCasino.blocks.tileEntities.TileEntityCardBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -27,9 +28,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraft.world.storage.MapData;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -40,7 +43,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	Tessellator tessellator;
 	Minecraft minecraft;
 	ICardGame gameMethods;
-	TileEntity parentBlock;
+	TileEntityCardBlock parentBlock;
 	RenderManager renderManager;
 	Render render;
 	ResourceLocation deckTexture;
@@ -75,26 +78,34 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	}
 
 	private void renderCardHand(ItemStack item) {
-		//String targetX = item.readFromNBT(par1NBTTagCompound);
-		int house = 1;
-		int value = 1;
-		totalCards=7;
+		int[] teCoords = item.stackTagCompound.getIntArray("gameCoords");
+		System.out.println("coords= x:"+teCoords[0]+"y:"+teCoords[1]+"z:"+teCoords[2]);
+		World parentWorld = minecraft.thePlayer.getEntityWorld();
 		
+		//this must be updated from NBT tags, NBT tags must be updated via packets..
+		
+		TileEntity parentTile = parentWorld.getTileEntity(teCoords[0], teCoords[1], teCoords[2]);
+		parentBlock = (TileEntityCardBlock)parentTile;
+		List<ICard> cards = parentBlock.getPlayerHand(entityclientplayer.getDisplayName());
+		if(cards==null)
+		{
+			entityclientplayer.inventory.setInventorySlotContents(entityclientplayer.inventory.currentItem,null); 
+			totalCards=0;
+		} else {
+			totalCards=cards.size()-1;
+		}
+		if(totalCards>=1)
+		{
 		GL11.glPushMatrix();
 		GL11.glRotatef((67.5F), 0F, 1F, 0F);
 		GL11.glTranslatef(7F/totalCards, -1.6F, 0F);
-		for(int cardIndex=1;cardIndex<=totalCards;cardIndex++)
-		{
-		if(house>4)
-			house=1;
-		if(value>13)
-			value=13;
-		renderCard(house,value,cardIndex);
-		house++;
-		value++;
-		}
-		
+		int cardIndex=1;
+			for (ICard iCard : cards) {
+				renderCard(iCard.getHouse(),iCard.getValue(),cardIndex);
+				cardIndex++;
+			}
 		GL11.glPopMatrix();
+		}
 	}
 
 	private void renderCard(int house, int value, int cardIndex) {

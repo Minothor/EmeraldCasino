@@ -40,7 +40,7 @@ public class Poker extends ACardGame {
 	@Override
 	public String getID()
 	{
-		return EmeraldCasino.MODID+"."+super.getID();
+		return EmeraldCasino.MODID+".poker.5CardDraw";
 	}
 
 	/**

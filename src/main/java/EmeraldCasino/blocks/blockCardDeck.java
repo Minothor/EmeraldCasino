@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -145,7 +146,11 @@ public class blockCardDeck extends BlockContainer{
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata) {
-		return new TileEntityCardBlock();
+		TileEntityCardBlock tecb =  new TileEntityCardBlock();
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setString("gameID", EmeraldCasino.MODID+".poker.5CardDraw");
+		tecb.writeToNBT(nbt);
+		return tecb;
 	}
 	
 	

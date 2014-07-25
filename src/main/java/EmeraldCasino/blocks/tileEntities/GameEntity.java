@@ -3,6 +3,7 @@ package emeraldCasino.blocks.tileEntities;
 import java.util.HashMap;
 import java.util.List;
 
+import emeraldCasino.api.games.IGame;
 import emeraldCasino.network.packets.GameMessage;
 import emeraldCasino.network.packets.GameUpdate;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,8 +12,9 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class GameEntity extends TileEntity{
+public abstract class GameEntity extends TileEntity{
 	protected String gameID;
+	protected IGame gameInst; 
 	protected String ownerDisplayName;
 	protected List<String> players;
 	protected HashMap<String, Integer> playerBalances;
@@ -30,8 +32,15 @@ public class GameEntity extends TileEntity{
 	public void writeToNBT(NBTTagCompound nbtTag)
 	{
 		super.writeToNBT(nbtTag);
-		nbtTag.setString("gameID", this.gameID);
-		nbtTag.setString("playerList", condensePlayers());
+		if(!(gameID==null)&&!gameID.equals(""))
+		{
+			nbtTag.setString("gameID", this.gameID);
+		}
+		
+		if(!(players==null)&&!players.isEmpty())
+		{
+			nbtTag.setString("playerList", condensePlayers());
+		}
 	}
 	
 	public void setOwner(EntityPlayer owner)
@@ -63,7 +72,11 @@ public class GameEntity extends TileEntity{
 	public void readFromNBT(NBTTagCompound nbtTag)
 	{
 		super.readFromNBT(nbtTag);
-		this.gameID = nbtTag.getString("gameID");
+		
+		if(nbtTag.hasKey("gameID"))
+		{
+			this.gameID = nbtTag.getString("gameID");
+		}
 	}
 	
 	private String condensePlayers() {

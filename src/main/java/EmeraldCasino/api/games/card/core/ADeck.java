@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.minecraft.nbt.NBTTagCompound;
 import emeraldCasino.EmeraldCasino;
 
 public abstract class ADeck implements IDeck {
@@ -23,7 +24,7 @@ public abstract class ADeck implements IDeck {
 		}
 		int house=1, value=1;
 		for(int i=0;i<deckSize;i++){
-			cards.add(new standardCard(house,value));
+			cards.add(new CardStandard(house,value));
 			if(value==valLimit){
 				house++;
 				value=1;
@@ -39,7 +40,7 @@ public abstract class ADeck implements IDeck {
 		throw new IllegalArgumentException("Both House Size and the number of ID number for the house must be greater than 0. Values Received: \nhousID: "+houseID+"\nhouseize: "+houseSize);
 		for(int i = 1;i<=houseSize;i++)
 		{
-			cards.add(new standardCard(houseID,jokers?1:i));
+			cards.add(new CardStandard(houseID,jokers?1:i));
 		}
 	}
 	
@@ -52,17 +53,27 @@ public abstract class ADeck implements IDeck {
 	{
 		try{
 		cards.remove(card);
-		System.gc();
 		} catch (Error e) {
 			System.err.println("Call to Burn(Card) resulted in error: "+e.getMessage());
 		}
 	}
 	
 	@Override
+	public void addCard(ICard card)
+	{
+		this.cards.add(card);
+	}
+	
+	@Override
+	public void addCards(java.util.List<ICard> cards)
+	{
+		this.cards.addAll(cards);
+	}
+	
+	@Override
 	public void burn()
 	{
 		burn(cards.get(0));
-		System.gc();
 	}
 
 	@Override
@@ -81,7 +92,20 @@ public abstract class ADeck implements IDeck {
 	public void shuffle(){
 		Collections.shuffle(cards);
 	}
-
+	
+	public NBTTagCompound toNBT(){
+		NBTTagCompound result= new NBTTagCompound();
+		int[] houses = new int[cards.size()];
+		int[] values = new int[cards.size()];
+		for(int j = 0;j<cards.size();j++){
+			houses[j]=cards.get(j).getHouse();
+			values[j]=cards.get(j).getValue();
+		}
+		result.setIntArray("houses", houses);
+		result.setIntArray("values", values);
+		return result;
+	}
+	
 	public String toString(){
 		String result="";
 		for(int j = 0;j<cards.size();j++){

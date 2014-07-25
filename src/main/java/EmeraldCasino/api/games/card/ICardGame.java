@@ -11,14 +11,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 
 public interface ICardGame extends IGame {
+		public IDeck createDeck();
 		
 		public void DealCards(IDeck deck, List<CardPlayer> players);
 		
-		CardPlayer EvalGame(List<CardPlayer> players);
+		public CardPlayer EvalGame(List<CardPlayer> players);
 		
-		EntityPlayer getPlayer(String username);
+		public EntityPlayer getPlayer(String username);
 		
 		public String toString(ArrayList<ICard> cards);
-		
-		public String getDeckTex();
 }

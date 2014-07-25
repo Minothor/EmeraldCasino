@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMapBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class itemCardHand extends Item{
@@ -16,6 +17,7 @@ public class itemCardHand extends Item{
 	public itemCardHand()
 	{
 	}
+	
 	
 	@Override
 	public boolean doesSneakBypassUse(World world, int x, int y, int z, EntityPlayer player)
@@ -51,7 +53,7 @@ public class itemCardHand extends Item{
 			if (player.isSneaking()){
 				
 			}else{
-			EmeraldCasino.ECchannel.sendToServer(new GameMessage("PLAY"));
+			EmeraldCasino.ECchannel.sendToServer(new GameMessage("PLAY."+X+"-"+Y+"-"+Z+"."+player.getDisplayName()));
 			}
 		}
 		return false;
@@ -64,12 +66,13 @@ public class itemCardHand extends Item{
 	}
 	
 	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack itemStack)
 	{
 		if (entityLiving instanceof EntityPlayer)
 		{
 			if (entityLiving.isSneaking()){
-				EmeraldCasino.ECchannel.sendToServer(new GameMessage("SELECT"));
+				int[] gameCoords = itemStack.getTagCompound().getIntArray("gameCoords");
+				EmeraldCasino.ECchannel.sendToServer(new GameMessage("SELECT."+gameCoords[0]+"-"+gameCoords[1]+"-"+gameCoords[2]+"."+((EntityPlayer) entityLiving).getDisplayName()));
 			}
 			return true;
 		}
@@ -81,7 +84,8 @@ public class itemCardHand extends Item{
 	{
 		System.out.println("RightClicked");
 		if (player.isSneaking()){
-			EmeraldCasino.ECchannel.sendToServer(new GameMessage("HOVER_NEXT"));
+			int[] gameCoords = itemStack.getTagCompound().getIntArray("gameCoords");
+			EmeraldCasino.ECchannel.sendToServer(new GameMessage("HOVER_NEXT."+gameCoords[0]+"-"+gameCoords[1]+"-"+gameCoords[2]+"."+player.getDisplayName()));
 		}
 		return itemStack;
 	}

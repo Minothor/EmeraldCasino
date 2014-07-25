@@ -2,10 +2,10 @@ package emeraldCasino.api.games.card.core;
 
 import java.util.Comparator;
 
-public class standardCard extends ACard{
+public class CardStandard extends ACard{
 	private int house, value;
 	
-	public standardCard(int i, int j){
+	public CardStandard(int i, int j){
 		if (j>13||j<1){
 			throw new IllegalArgumentException("Card Value between 1 and 13 expected. Recieved: "+j);
 		}

@@ -10,6 +10,8 @@ import java.util.UUID;
 
 
 
+
+
 //mod imports
 import emeraldCasino.api.games.*;
 import emeraldCasino.api.games.card.*;
@@ -25,11 +27,11 @@ public abstract class ACardGame extends AGame implements ICardGame{
 
 protected MinecraftServer server = MinecraftServer.getServer();
 protected String gameOwner;
- protected List<ICard> tableCards = new LinkedList<ICard>();
- protected Hand dealerHand = new Hand();
- protected List<CardPlayer> players = new LinkedList<CardPlayer>();
- protected IDeck deck;
- private int[] buyIn={0,0};
+protected List<ICard> tableCards = new LinkedList<ICard>();
+protected Hand dealerHand = new Hand();
+protected List<CardPlayer> players = new LinkedList<CardPlayer>();
+
+private int[] buyIn={0,0};
  
 	/**
 	 * Default Constructor
@@ -92,9 +94,11 @@ protected String gameOwner;
 		return result;
 	}
 	
+	
 	@Override
-		public String getDeckTex() {
-			return deck.getTexture();
+		public IDeck createDeck() {
+			return new DeckStandard();
 		}
+		
 	
 }
