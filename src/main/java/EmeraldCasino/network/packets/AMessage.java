@@ -18,17 +18,32 @@ import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
 import emeraldCasino.blocks.tileEntities.GameEntity;
 
-public class GameMessage extends AMessage {
-	public GameMessage() {}
-	
-	public GameMessage(String string) {
-		this.packetPayload=string;
+public abstract class AMessage implements IMessage {
+	protected static JsonParser jsonReader = new JsonParser();
+	World targetWorld = MinecraftServer.getServer().getEntityWorld();
+	protected int targetX,targetY,targetZ;
+	public String packetPayload;
+	protected JsonObject packetData;
+
+	protected boolean transferData()
+	{
+		return false;
 	}
 	
 	@Override
-	protected boolean transferData()
+	public void fromBytes(ByteBuf buf)
 	{
-		GameEntity target = (GameEntity)targetWorld.getTileEntity(targetX, targetY, targetZ);
-		return target.processMessage(new GameUpdate(packetPayload));
+		packetPayload =  ByteBufUtils.readUTF8String(buf);
+		//packetData = jsonReader.parse(packetPayload).getAsJsonObject();
+
 	}
+
+	@Override
+	public void toBytes(ByteBuf buf)
+	{
+		//packetPayload = packetData.getAsString();
+		ByteBufUtils.writeUTF8String(buf, packetPayload);
+
+	}
+
 }
