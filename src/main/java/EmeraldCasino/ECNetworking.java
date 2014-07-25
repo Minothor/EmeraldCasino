@@ -15,7 +15,8 @@ public class ECNetworking {
 		
 		
 		//register Packets
-		ECchannel.registerMessage(ECMessageHandler.class, GameMessage.class, 0, Side.SERVER); 
+		ECchannel.registerMessage(ECServerMessageHandler.class, GameMessage.class, 0, Side.SERVER);
+		ECchannel.registerMessage(ECClientMessageHandler.class, PlayerMessage.class, 0, Side.CLIENT); 
 		
 	}
 
