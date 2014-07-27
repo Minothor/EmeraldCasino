@@ -26,7 +26,7 @@ public class PlayerMessage extends AMessage {
 	}
 	
 	@Override
-	protected boolean transferData()
+	public boolean transferData()
 	{
 		GameEntity target = (GameEntity)targetWorld.getTileEntity(targetX, targetY, targetZ);
 		return target.processMessage(new GameUpdate(packetPayload));

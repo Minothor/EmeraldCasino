@@ -19,6 +19,7 @@ public abstract class GameEntity extends TileEntity{
 	protected List<String> players;
 	protected HashMap<String, Integer> playerBalances;
 	
+	//handle most common packet JSON->NBT transfers here, override function for game specific data.
 	
 	@Override
 	public Packet getDescriptionPacket() {

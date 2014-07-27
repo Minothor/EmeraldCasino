@@ -35,12 +35,14 @@ public abstract class AMessage implements IMessage {
 	{
 		packetPayload =  ByteBufUtils.readUTF8String(buf);
 		//packetData = jsonReader.parse(packetPayload).getAsJsonObject();
+		//read head section
 
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
+		//write head section and append game specific body
 		//packetPayload = packetData.getAsString();
 		ByteBufUtils.writeUTF8String(buf, packetPayload);
 
