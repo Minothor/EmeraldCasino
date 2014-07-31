@@ -45,6 +45,8 @@ public class EmeraldCasino
   	//Set Creative Tab Icon
   	public static CreativeTabs tabEC;
   	
+  	public static CasinoRegistry casinoRegistry;
+  	
     
   	@EventHandler
   	public void preInit(FMLPreInitializationEvent event)
@@ -76,6 +78,8 @@ public class EmeraldCasino
   			ECRecipes.register();
   			
   			ECEvents.register();
+  			
+  			ECGames.register();
   	  		
   	}
     

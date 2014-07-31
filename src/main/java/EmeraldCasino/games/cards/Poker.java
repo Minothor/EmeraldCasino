@@ -30,7 +30,6 @@ public class Poker extends ACardGame {
 	public Poker() {
 		super();
 		gameName="5 Card Draw";
-		emeraldCasino.CasinoRegistry.registerGame(this);
 	}
 
 	/**
@@ -40,7 +39,7 @@ public class Poker extends ACardGame {
 	@Override
 	public String getID()
 	{
-		return EmeraldCasino.MODID+".poker.5CardDraw";
+		return EmeraldCasino.MODID+"."+"poker.5CardDraw";
 	}
 
 	/**

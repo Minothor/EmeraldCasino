@@ -6,6 +6,8 @@ import java.util.List;
 import com.google.common.collect.BiMap;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import emeraldCasino.EmeraldCasino;
 import emeraldCasino.api.games.EGameType;
 import emeraldCasino.api.games.core.*;
@@ -32,6 +34,21 @@ public class TileEntityCardBlock extends GameEntity{
 		super();
 		players = new HashMap<String, CardPlayer>();
 		System.out.println("Tile Entity Created!");
+	}
+	
+	public boolean setGame(ICardGame newGame)
+	{
+		ICardGame oldGame=this.game;
+		boolean result = (oldGame!=newGame);
+		if(result)
+			this.game=newGame;
+		return result;
+	}
+	
+	@Override
+	public boolean canUpdate()
+	{
+		return false;
 	}
 	
 	@Override
@@ -115,9 +132,10 @@ public class TileEntityCardBlock extends GameEntity{
 		return null;
 	}
 	
+	@SideOnly(Side.SERVER)
 	@Override
 	public void activatedBy(EntityPlayer player) {
-		if(player.isClientWorld()&&player.inventory.getStackInSlot(player.inventory.currentItem)==null)
+		if(player.inventory.getStackInSlot(player.inventory.currentItem)==null)
 		{
 			if(!(players.containsKey(player.getDisplayName())))
 			{

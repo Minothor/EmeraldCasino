@@ -2,6 +2,7 @@ package emeraldCasino.renderers.items;
 
 import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
@@ -50,6 +51,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
 	ResourceLocation playerTexture;
 	EntityClientPlayerMP entityclientplayer;
 	int totalCards;
+	List<ICard> cards;
 	
 	public ItemCardHandRenderer() {
 		itemRenderId = RenderingRegistry.getNextAvailableRenderId();
@@ -59,6 +61,7 @@ public class ItemCardHandRenderer implements IItemRenderer {
 		deckTexture = new ResourceLocation(emeraldCasino.EmeraldCasino.MODID,"textures/cardDecks/deck_standard.png");
 		entityclientplayer = minecraft.thePlayer;
 		//entityclientplayer.getLocationSkin();
+		cards = new LinkedList<ICard>();
 	}
 
 	@Override
@@ -86,7 +89,12 @@ public class ItemCardHandRenderer implements IItemRenderer {
 		
 		TileEntity parentTile = parentWorld.getTileEntity(teCoords[0], teCoords[1], teCoords[2]);
 		parentBlock = (TileEntityCardBlock)parentTile;
-		List<ICard> cards = parentBlock.getPlayerHand(entityclientplayer.getDisplayName());
+		cards.clear();
+		cards.add(new CardStandard(1, 1));
+		
+		
+		
+		//to incorporate for destroying orphaned hands.
 		if(cards==null)
 		{
 			entityclientplayer.inventory.setInventorySlotContents(entityclientplayer.inventory.currentItem,null); 

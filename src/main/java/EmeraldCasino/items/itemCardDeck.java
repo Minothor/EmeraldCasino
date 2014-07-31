@@ -2,6 +2,8 @@ package emeraldCasino.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import emeraldCasino.*;
+import emeraldCasino.api.games.EGameType;
+import emeraldCasino.api.games.card.ICardGame;
 import emeraldCasino.blocks.BlockHelper;
 import emeraldCasino.blocks.tileEntities.TileEntityCardBlock;
 import emeraldCasino.games.*;
@@ -54,7 +56,13 @@ public class itemCardDeck extends Item{
 			if (temp!= null){
 				world.setBlock(target[0], target[1], target[2],temp);
 				world.setBlockMetadataWithNotify(target[0], target[1], target[2], stack.getItemDamage(), 2);
+				
 				((TileEntityCardBlock)world.getTileEntity(target[0], target[1], target[2])).setOwner(player);
+				
+				ICardGame cardGame = (ICardGame)emeraldCasino.CasinoRegistry.getGame(EGameType.CARD, EmeraldCasino.MODID+".poker.5CardDraw");
+				((TileEntityCardBlock)world.getTileEntity(target[0], target[1], target[2])).setGame(cardGame);
+				System.out.println("Game var set to: "+cardGame.getID());
+				
 				player.inventory.consumeInventoryItem(player.getCurrentEquippedItem().getItem());
 				System.out.println("Block owned by : "+((TileEntityCardBlock)world.getTileEntity(target[0], target[1], target[2])).getOwner());
 				return true;
