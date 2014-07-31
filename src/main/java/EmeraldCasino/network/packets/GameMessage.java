@@ -19,6 +19,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import emeraldCasino.blocks.tileEntities.GameEntity;
 
 public class GameMessage extends AMessage {
+	World targetWorld = MinecraftServer.getServer().getEntityWorld();
+	protected int targetX,targetY,targetZ;
+	
 	public GameMessage() {}
 	
 	public GameMessage(String string) {

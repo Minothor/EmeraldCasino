@@ -1,9 +1,13 @@
 package emeraldCasino;
 
 import java.util.Map;
+
+import net.minecraft.item.Item;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.HashBiMap;
+
 import emeraldCasino.api.games.EGameType;
 import emeraldCasino.api.games.IGame;
 

@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class itemCardHand extends Item{
+public class itemCardHand extends Item implements IGameInterfaceItem{
 
 	public itemCardHand()
 	{

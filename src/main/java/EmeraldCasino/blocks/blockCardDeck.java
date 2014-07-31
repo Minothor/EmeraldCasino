@@ -147,6 +147,7 @@ public class blockCardDeck extends BlockContainer{
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata) {
 		TileEntityCardBlock tecb =  new TileEntityCardBlock();
+		
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setString("gameID", EmeraldCasino.MODID+".poker.5CardDraw");
 		tecb.writeToNBT(nbt);

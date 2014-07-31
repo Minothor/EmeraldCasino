@@ -48,6 +48,7 @@ public class TileEntityCardBlock extends GameEntity{
 	    if(nbt.hasKey("gameID"))
 	    {
 	    this.gameNBTcondensed = nbt.getString("gameID");
+	    System.out.println("GameID: "+gameNBTcondensed);
 	    resolveGame();
 	    }
 	    
@@ -125,7 +126,7 @@ public class TileEntityCardBlock extends GameEntity{
 				gameCoords[0]=this.xCoord;
 				gameCoords[1]=this.yCoord;
 				gameCoords[2]=this.zCoord;
-				ItemStack hand =new ItemStack(GameRegistry.findItem(EmeraldCasino.MODID, "cardHand"));
+				ItemStack hand =new ItemStack(game.getInterfaceItem());
 				hand.stackTagCompound = new NBTTagCompound();
 				hand.getTagCompound().setIntArray("gameCoords", gameCoords);
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, hand);

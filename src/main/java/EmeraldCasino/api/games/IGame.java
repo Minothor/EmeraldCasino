@@ -3,6 +3,7 @@ package emeraldCasino.api.games;
 import emeraldCasino.api.games.card.core.CardPlayer;
 import emeraldCasino.api.games.core.IPlayer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.world.WorldSettings.GameType;
 
 public interface IGame {
@@ -15,4 +16,5 @@ public interface IGame {
 	public String getName();
 	public void setOwner(EntityPlayer owner);
 	public String getOwner();
+	public Item getInterfaceItem();
 }

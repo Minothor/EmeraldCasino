@@ -20,8 +20,6 @@ import emeraldCasino.blocks.tileEntities.GameEntity;
 
 public abstract class AMessage implements IMessage {
 	protected static JsonParser jsonReader = new JsonParser();
-	World targetWorld = MinecraftServer.getServer().getEntityWorld();
-	protected int targetX,targetY,targetZ;
 	public String packetPayload;
 	protected JsonObject packetData;
 

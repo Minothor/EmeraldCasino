@@ -12,11 +12,17 @@ import java.util.UUID;
 
 
 
+
+
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import emeraldCasino.EmeraldCasino;
 //mod imports
 import emeraldCasino.api.games.*;
 import emeraldCasino.api.games.card.*;
 import emeraldCasino.api.games.card.core.*;
 import emeraldCasino.api.games.core.IPlayer;
+import emeraldCasino.items.IGameInterfaceItem;
 import net.minecraft.client.Minecraft;
 
 //Minecraft imports
@@ -40,6 +46,7 @@ private int[] buyIn={0,0};
 	public ACardGame() {
 		super();
 		this.type=EGameType.CARD;
+		this.interfaceItem=(IGameInterfaceItem) GameRegistry.findItem(EmeraldCasino.MODID, "cardHand");
 	}
 	
 	public void DealCards(IDeck deck, List<CardPlayer> players){
