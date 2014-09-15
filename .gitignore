@@ -10,3 +10,8 @@ CREDITS-fml.txt
 LICENSE-fml.txt
 MinecraftForge-Credits.txt
 MinecraftForge-License.txt
+.metadata/.lock
+Documentation/forge-1.7.2-10.12.2.1121-javadoc/
+.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
+.metadata/
+forge-1.7.2-10.12.1.1060-changelog.txt
