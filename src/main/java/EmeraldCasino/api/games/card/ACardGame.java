@@ -15,6 +15,10 @@ import java.util.UUID;
 
 
 
+
+
+
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import emeraldCasino.EmeraldCasino;
 //mod imports
@@ -27,7 +31,11 @@ import net.minecraft.client.Minecraft;
 
 //Minecraft imports
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.WorldManager;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.WorldServerMulti;
 
 public abstract class ACardGame extends AGame implements ICardGame{
 
@@ -66,13 +74,15 @@ private int[] buyIn={0,0};
 	}
 	
 	public IPlayer addPlayer(String username){
-		EntityPlayer player = server.getConfigurationManager().getPlayerForUsername(username);
+		//EntityPlayer player = server.getConfigurationManager().getPlayerForUsername(username); // broke in 1.7.10 update
+		EntityPlayer player = server.getConfigurationManager().func_152612_a(username);
 		return(new CardPlayer(player));
 		
 	}
 	
 	public void removePlayer(String username){
-		EntityPlayer player = server.getConfigurationManager().getPlayerForUsername(username);
+		//EntityPlayer player = server.getConfigurationManager().getPlayerForUsername(username);
+		EntityPlayer player = server.getConfigurationManager().func_152612_a(username);
 		//this.players.remove((new Player(player));
 	}
 	
