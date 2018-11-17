@@ -47,16 +47,19 @@ public class CasinoRegistry {
 	}
 
 	public static String getGameID(IGame game) {
-		if(game!=null)
-		{
-			EGameType gameType = game.getType();
-			Iterable<Map<String,IGame>> typeResults = getInstance().CasinoGames.get(gameType);
-			for (Map<String, IGame> map : typeResults) {
-				BiMap<IGame, String> invMap = ((BiMap)map).inverse();
-				if(invMap.containsKey(game))
-					return invMap.get(game);
+		if (game == null) {
+			return null;
+		}
+		
+		EGameType gameType = game.getType();
+		Iterable<Map<String,IGame>> typeResults = getInstance().CasinoGames.get(gameType);
+		for (Map<String, IGame> map : typeResults) {
+			BiMap<IGame, String> invMap = ((BiMap)map).inverse();
+			if (invMap.containsKey(game) == true) {
+				return invMap.get(game);
 			}
 		}
+		
 		return null;
 	}
 
